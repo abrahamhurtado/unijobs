@@ -2,16 +2,8 @@ import React from 'react';
 import { Router } from 'react-router';
 import { createHistory } from 'history';
 
-import App from './containers/App.jsx';
-
-
-const rootRoute = {
-  path: '/',
-  component: App(React),
-  childRoutes: [
-    require('./routes/Children')
-  ]
-};
+import App from './containers/App';
+import rootRoute from '../shared/routes';
 
 export default (
   <Router

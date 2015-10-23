@@ -4,7 +4,7 @@ import { renderToStaticMarkup as render } from 'react-dom/server';
 import $ from 'cheerio';
 import testify from '../fixture/testify';
 
-// import ChildrenFactory from '../../frontend/routes/Children/components/Children.jsx';
+// import ChildrenFactory from '../../frontend/routes/Children/components/Children';
 
 // const Children = testify(ChildrenFactory)(React);
 

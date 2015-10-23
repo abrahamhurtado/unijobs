@@ -18,13 +18,13 @@ export default {
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
-    extensions: [ '', '.js', 'jsx' ]
+    extensions: [ '', '.js', '.jsx' ]
   },
   module: {
     loaders: [ {
       test: /\.jsx?$/,
       loaders: [ 'babel' ],
-      include: resolve('./frontend')
+      include: [resolve('./frontend'), resolve('./shared')]
     } ]
   }
 };

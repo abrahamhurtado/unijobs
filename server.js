@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import { createLocation } from 'history';
-import routes from './shared/routes.jsx';
+import routes from './shared/routes';
 import serverRoutes from './routes/routes';
 
 const app = express();
