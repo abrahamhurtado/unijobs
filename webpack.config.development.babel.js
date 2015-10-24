@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 export default {
   context: __dirname,
-  devtool: 'eval',
+  devtool: '#source-map',
   entry: [
     'webpack-hot-middleware/client',
     './frontend/main'
@@ -14,6 +14,7 @@ export default {
     filename: 'bundle.js'
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],

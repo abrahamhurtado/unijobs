@@ -11,7 +11,7 @@ const env = process.env.NODE_ENV || 'development';
 
 if (env === 'development') {
   const webpack = require('webpack');
-  const config = require('./webpack.config.babel');
+  const config = require('./webpack.config.development.babel');
   const compiler = webpack(config);
 
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -24,8 +24,6 @@ if (env === 'development') {
   console.log('dev mode with hot reload');
 }
 
-app.use(express.static('./frontend'));
-
 function html (Component) {
   return `
   <!DOCTYPE html>
@@ -37,11 +35,13 @@ function html (Component) {
     </head>
     <body>
       <div id="react-app">${Component}</div>
-      <script type="text/javascript" src="./static/bundle.js"></script>
+      <script type="text/javascript" src="/static/bundle.js"></script>
     </body>
   </html>
   `;
 }
+
+app.use('/static', express.static('./frontend/build/'));
 
 app.use(serverRoutes);
 

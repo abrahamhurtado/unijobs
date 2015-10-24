@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.babel.js",
-    "start": "node index.js",
+    "start": "npm run build && npm run start:prod",
+    "start:prod": "NODE_ENV=production node index.js",
+    "build": "webpack --config webpack.config.production.babel.js",
+    "start:dev": "node index.js",
     "lint": "eslint frontend shared",
     "test": "babel-node test/index | faucet",
     "validate": "npm run lint && npm run build && npm run test"
