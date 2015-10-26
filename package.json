@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run start:prod",
+    "dev": "npm run start:dev",
     "start:prod": "NODE_ENV=production node index.js",
     "build": "webpack --config webpack.config.production.babel.js",
     "start:dev": "node index.js",
@@ -34,11 +35,15 @@
   "dependencies": {
     "babel": "5.8.23",
     "body-parser": "1.14.1",
+    "compression": "1.6.0",
     "express": "4.13.3",
+    "helmet": "0.13.0",
     "history": "1.12.5",
+    "morgan": "1.6.1",
     "nodemailer": "1.8.0",
     "object-assign": "4.0.1",
     "passwordless": "1.1.0",
+    "passwordless-postgrestore": "git+https://github.com/arhcstolen/passwordless-postgrestore.git#addc56ddf152204d99c75bf6f3ba0727baf9329e",
     "pg-promise": "2.1.0",
     "react": "0.14.0",
     "react-dom": "0.14.0",

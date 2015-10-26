@@ -4,7 +4,12 @@ import ReactDOM from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import { createLocation } from 'history';
 import routes from './shared/routes';
-import serverRoutes from './routes/routes';
+// import serverRoutes from './routes/routes';
+import html from './shared/html';
+
+import compression from 'compression';
+import morgan from 'morgan';
+import helmet from 'helmet';
 
 const app = express();
 const env = process.env.NODE_ENV || 'development';
@@ -24,26 +29,13 @@ if (env === 'development') {
   console.log('dev mode with hot reload');
 }
 
-function html (Component) {
-  return `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charSet="utf-8"/>
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-      <title>UniJOBS</title>
-    </head>
-    <body>
-      <div id="react-app">${Component}</div>
-      <script type="text/javascript" src="/static/bundle.js"></script>
-    </body>
-  </html>
-  `;
-}
+app.use(helmet());
+app.use(compression());
+app.use(morgan(env === "production" ? "combined" : "dev"));
 
 app.use('/static', express.static('./frontend/build/'));
 
-app.use(serverRoutes);
+// app.use(serverRoutes);
 
 app.use((req, res) => {
   const location = createLocation(req.url);
