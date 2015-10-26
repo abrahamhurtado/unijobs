@@ -1,14 +1,42 @@
 import { Link } from 'react-router';
+import MenuFactory from '../components/Menu';
+import ModalFactory from '../components/Modal';
 
 export default (React) => {
+  const Menu = MenuFactory(React);
+  const Modal = ModalFactory(React);
+
   return React.createClass({
-    displayName: 'MainSection',
+    displayName: 'App',
+    componentWillReceiveProps (nextProps) {
+      if ((
+        nextProps.location.key !== this.props.location.key &&
+        nextProps.location.state &&
+        nextProps.location.state.modal
+      )) {
+        this.previousChildren = this.props.children;
+      }
+    },
     render () {
+      let {location} = this.props;
+      let isModal = (
+        location.state &&
+        location.state.modal &&
+        this.previousChildren
+      );
+
       return (
         <div>
-          <h1>UniJOBS: tú puente al éxito</h1>
-          <Link to="/children">Children</Link>
-          {this.props.children}
+          <Menu {...this.props} />
+          {isModal ?
+            this.previousChildren :
+            this.props.children
+          }
+          {isModal && (
+            <Modal isOpen={true} returnTo={location.state.returnTo}>
+              {this.props.children}
+            </Modal>
+          )}
         </div>
       );
     }
