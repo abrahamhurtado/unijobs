@@ -4,12 +4,13 @@ import ReactDOM from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import { createLocation } from 'history';
 import routes from './shared/routes';
-// import serverRoutes from './routes/routes';
 import html from './shared/html';
+import schema from './routes/graphql';
 
 import compression from 'compression';
 import morgan from 'morgan';
 import helmet from 'helmet';
+import graphqlHTTP from 'express-graphql';
 
 const app = express();
 const env = process.env.NODE_ENV || 'development';
@@ -35,7 +36,7 @@ app.use(morgan(env === "production" ? "combined" : "dev"));
 
 app.use('/static', express.static('./frontend/build/'));
 
-// app.use(serverRoutes);
+app.use('/graphql', graphqlHTTP({ schema:schema, pretty:true }));
 
 app.use((req, res) => {
   const location = createLocation(req.url);
