@@ -1,6 +1,5 @@
 import {
   GraphQLObjectType,
-  GraphQLSchema,
   GraphQLNonNull,
   GraphQLList,
   GraphQLString,
@@ -8,17 +7,13 @@ import {
   GraphQLID
 } from 'graphql';
 
-import {
-  usersDB,
-  businessDB,
-  jobsDB
-} from '../shared/api';
+import {User, Business, Job} from '../db/models';
 
 const usuarios = new GraphQLObjectType({
   name: 'Usuarios',
   description: 'Los usuarios de UniJOBS',
   fields: () => ({
-    id: {
+    _id: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'El id único de cada usuario'
     },
@@ -50,11 +45,7 @@ const usuarios = new GraphQLObjectType({
       type: new GraphQLList(trabajos),
       description: 'Los trabajos que pueden interesar al usuario, según sus intereses y suscripciones',
       resolve (parent, args) {
-        return Array.from(new Set(
-          parent.intereses.map((word) => {
-            return [for (i of Object.keys(jobsDB)) jobsDB[i]].filter(({intereses}) => intereses.includes(word));
-          }).reduce((x, y) => x.concat(y), [])
-        ));
+        return Job.find({intereses: {"$in": parent.intereses}});
       }
     }
   })
@@ -64,7 +55,7 @@ const empresas = new GraphQLObjectType({
   name: 'Empresas',
   description: 'Las empresas que usan UniJOBS',
   fields: () => ({
-    id: {
+    _id: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'El id de la empresa'
     },
@@ -80,11 +71,19 @@ const empresas = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Información acerca de la empresa'
     },
+    trabajosId: {
+      type: new GraphQLList(new GraphQLObjectType({
+        name: 'TrabajosID',
+        fields: () => ({
+          _id: {type: GraphQLInt}
+        })
+      }))
+    },
     trabajos: {
       type: new GraphQLList(trabajos),
       description: 'Los trabajos que está ofreciendo la empresa',
       resolve (parent, args) {
-        return [for (i of Object.keys(jobsDB)) jobsDB[i]].filter((trabajo) => trabajo.empresaId.id === parent.id);
+        return Job.find({"empresaId._id": parent['_id']});
       }
     }
   })
@@ -94,7 +93,7 @@ const trabajos = new GraphQLObjectType({
   name: 'Trabajos',
   description: 'Los trabajos disponibles en UniJOBS',
   fields: () => ({
-    id: {
+    _id: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'El id del trabajo'
     },
@@ -114,63 +113,24 @@ const trabajos = new GraphQLObjectType({
       type: new GraphQLObjectType({
         name: 'EmpresaID',
         fields: () => ({
-          id: {
+          _id: {
             type: GraphQLInt
           }
         })
       })
     },
     empresa: {
-      type: (empresas),
+      type: empresas,
       description: 'La empresa que ofrece este trabajo en UniJOBS',
       resolve (parent, args) {
-        return [for (i of Object.keys(businessDB)) businessDB[i]].filter((empresa) => empresa.id === parent.empresaId.id).reduce((a, b) => b, {});
+        return Business.findById(parent.empresaId['_id']);
       }
     }
   })
 });
 
-const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'busqueda',
-    fields: {
-      usuario: {
-        type: usuarios,
-        args: {
-          id: {type: GraphQLInt}
-        },
-        resolve (parent, {id}) {
-          return [for (i of Object.keys(usersDB)) usersDB[i]].filter((usuario) => usuario.id === id).reduce((a, b) => b, {});
-        }
-      },
-      usuarios: {
-        type: usuarios,
-        resolve (parent, args) {
-          return [for (i of Object.keys(usersDB)) usersDB[i]];
-        }
-      },
-      empresa: {
-        type: empresas,
-        args: {
-          id: {type: GraphQLInt}
-        },
-        resolve (parent, {id}) {
-          return [for (i of Object.keys(businessDB)) businessDB[i]].filter((empresa) => empresa.id === id).reduce((a, b) => b, {});
-        }
-      },
-      trabajo: {
-        type: trabajos,
-        args: {
-          id: {type: GraphQLInt}
-        },
-        resolve (parent, {id}) {
-          return [for (i of Object.keys(jobsDB)) jobsDB[i]].filter((trabajo) => trabajo.id === id).reduce((a, b) => b, {});
-        }
-      }
-    }
-  })
-});
-
-console.log('GraphQL API lista');
-
-export default schema;
+export default {
+  usuarios,
+  empresas,
+  trabajos
+};

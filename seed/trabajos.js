@@ -1,6 +1,6 @@
-export default {
-  0: {
-    id: 1,
+export default [
+  {
+    _id: 0,
     titulo: 'Programador en JavaScript',
     descripcion: `Se busca programador en JavaScript con 5 años de experiencia.
      Conocimiento en el desarrollo de aplicaciones isomórficas con React y NodeJS, además de React Native.
@@ -13,11 +13,11 @@ export default {
       'computacion'
     ],
     empresaId: {
-      id: 1
+      _id: 0
     }
   },
-  1: {
-    id: 2,
+  {
+    _id: 1,
     titulo: 'Programador en NODEJS',
     descripcion: 'Conocimientos necesarios: ExpressJS',
     intereses: [
@@ -28,11 +28,11 @@ export default {
       'computacion'
     ],
     empresaId: {
-      id: 1
+      _id: 0
     }
   },
-  2: {
-    id: 5,
+  {
+    _id: 5,
     titulo: 'Diseñador en Illustrator',
     descripcion: 'Que sepa crear vectores',
     intereses: [
@@ -41,7 +41,7 @@ export default {
       'ux'
     ],
     empresaId: {
-      id: 2
+      _id: 1
     }
   }
-};
+];

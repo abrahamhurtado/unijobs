@@ -1,6 +1,6 @@
-export default {
-  1: {
-    id: 1,
+export default [
+  {
+    _id: 0,
     nombre: 'Abraham',
     edad: 18,
     genero: 'hombre',
@@ -12,10 +12,10 @@ export default {
     suscripciones: [
       {id: 2}
     ],
-    correo: 'mail@example.com'
+    correo: 'mi@correo.com'
   },
-  2: {
-    id: 2,
+  {
+    _id: 1,
     nombre: 'Diego',
     edad: 18,
     descripcion: 'Diseño de experiencias (UX) e interfaces (UI) en CSIPRO.',
@@ -26,18 +26,24 @@ export default {
       'dibujos'
     ],
     suscripciones: [
-      {id: 2}
+      {_id: 2}
     ],
-    correo: 'mail@example.com'
+    correo: 'su@correo.com'
   },
-  3: {
-    id: 3,
-    nombre: 'Alan',
-    edad: 18,
+  {
+    _id: 2,
+    nombre: 'Saúl',
+    edad: 19,
+    descripcion: 'Un tío muy guay',
     genero: 'hombre',
     intereses: [
-      'videojuegos',
-      'cine'
+      'programación',
+      'android',
+      'java'
+    ],
+    correo: 'el@correo.com',
+    suscripciones: [
+      {_id: 0}
     ]
   }
-};
+];

@@ -6,17 +6,15 @@ import Children from '../frontend/routes/Children/components/Children';
 import Login from '../frontend/components/Login';
 import SignUp from '../frontend/components/SignUp';
 
-if (typeof require.ensure !== 'function') require.ensure = function (d, c) { c(require); };
-
-let HolaMundo = (props) => <h2>{`Hola, ${props.nombre}`}</h2>;
+let HolaMundo = (props) => <h2>{`Hola, Mundo`}</h2>;
 
 export default {
   path: '/',
-  component: App(React),
+  component: App,
   indexRoute: {component: HolaMundo},
   childRoutes: [
     { path: '/children', component: Children },
-    { path: '/login', component: Login(React) },
-    { path: '/signup', component: SignUp(React) }
+    { path: '/login', component: Login },
+    { path: '/signup', component: SignUp }
   ]
 };

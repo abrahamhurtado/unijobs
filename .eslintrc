@@ -8,7 +8,7 @@
   "ecmaFeatures": {
     "jsx": true,
     "superInFunctions": false,
-    "classes": false,
+    "classes": true,
     "modules": [2]
   },
   "plugins": [
@@ -43,7 +43,7 @@
     "consistent-return": [2],
     "curly": [2, "multi-line"],
     "default-case": [2],
-    "dot-notation": [2, { "allowKeywords": true }],
+    "dot-notation": [1, { "allowKeywords": true }],
     "eqeqeq": [2],
     "guard-for-in": [0],
     "no-alert": [2],
@@ -57,7 +57,7 @@
     "no-fallthrough": [2],
     "no-floating-decimal": [2],
     "no-implied-eval": [2],
-    "no-invalid-this": [2],
+    "no-invalid-this": [1],
     "no-iterator": [2],
     "no-labels": [2],
     "no-lone-blocks": [2],
@@ -98,7 +98,7 @@
     "no-undef": [2],
     "no-undefined": [2],
     "no-unused-vars": [1, { "vars": "all", "args": "after-used" }],
-    "no-use-before-define": [2],
+    "no-use-before-define": [1],
     "array-bracket-spacing": [1, "always"],
     "block-spacing": [1, "always"],
     "brace-style": [1, "1tbs", { "allowSingleLine": true }],
@@ -109,7 +109,7 @@
     "func-names": [0],
     "func-style": [0, "declaration"],
     "indent": [1, 2],
-    "jsx-quotes": [1, "prefer-double"],
+    "jsx-quotes": [1, "prefer-single"],
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
     "max-nested-callbacks": [0, 2],
     "new-cap": [0],
@@ -123,7 +123,7 @@
     "no-trailing-spaces": [2, {"skipBlankLines": true}],
     "no-underscore-dangle": [2],
     "no-unneeded-ternary": [2],
-    "object-curly-spacing": [0, "never"],
+    "object-curly-spacing": [0, "always"],
     "one-var": [0],
     "operator-assignment": [0, "always"],
     "operator-linebreak": [2, "after"],
@@ -156,7 +156,7 @@
     "prefer-spread": [2],
     "prefer-template": [2],
     "require-yield": [2],
-    "react/jsx-curly-spacing": [0, "never"],
+    "react/jsx-curly-spacing": [1, "always"],
     "react/jsx-max-props-per-line": [1, {"maximum: 1"}],
     "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
@@ -175,6 +175,6 @@
     "react/self-closing-comp": 2,
     "react/sort-comp": [1, {"order": ["lifecycle", "everything-else","render"]}],
     "react/wrap-multilines": [1, {"declaration": true, "assingment": true, "return": true}],
-    "no-class/no-class": 2
+    "no-class/no-class": 0
   }
 }

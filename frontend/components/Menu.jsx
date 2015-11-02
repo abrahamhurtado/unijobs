@@ -1,6 +1,7 @@
+import React from 'react'
 import { Link } from 'react-router';
 
-export default (React) => (props) => (
+export default (props) => (
   <nav>
     <h1>
       <Link to="/">UniJobs: tu puente al éxito</Link>
