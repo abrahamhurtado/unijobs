@@ -28,7 +28,7 @@
     "eslint-plugin-no-class": "0.1.0",
     "eslint-plugin-react": "3.6.3",
     "faucet": "0.0.1",
-    "nodemon": "1.8.0",
+    "nodemon": "^1.8.0",
     "precommit-hook-eslint": "3.0.0",
     "react-transform-hmr": "0.1.6",
     "skin-deep": "0.11.0",
