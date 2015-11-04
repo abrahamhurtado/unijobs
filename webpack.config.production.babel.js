@@ -31,6 +31,7 @@ export default {
   module: {
     loaders: [ {
       test: /\.jsx?$/,
+      exclude: /node_modules/,
       loaders: [ 'babel' ],
       include: [resolve('./frontend'), resolve('./shared')]
     } ]

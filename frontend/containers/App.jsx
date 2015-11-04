@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
 import Menu from '../components/Menu';
 import Modal from '../components/Modal';
 
 export default class App extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
   }
   componentWillReceiveProps (nextProps) {
     if ((

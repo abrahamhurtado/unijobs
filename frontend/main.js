@@ -1,4 +1,11 @@
 import { render } from 'react-dom';
-import routes from './routes';
+import { match } from 'react-router';
+import { createLocation } from 'history';
+import routes from '../shared/routes';
+import Component from './routes';
 
-render(routes, document.getElementById('react-app'));
+const location = createLocation(document.location.pathname + document.location.search);
+
+match({routes, location}, (err, redirectLocation, props) => {
+  render(Component, document.getElementById('react-app'));
+});
