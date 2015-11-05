@@ -1,203 +1,158 @@
 # UniJOBS
 Repositorio del proyecto de UniJOBS
 
-## Corre la aplicación
-- Primero
+Ahora, en el repo de UniJOBS se encuentran dos proyectos: las versiones nativas para iOS y Android en ```./unijobsNative``` y la versión web en ```./web```, junto con el servidor que alimentará a todas las aplicaciones.
+
+## DOCS
+
+- [Updrage Guide](docs/upgrade.md)
+- [API](docs/api.md)
+- [React: cómo funciona y cómo usarlo](docs/components.md)
+- [Consumir datos de la API en nuestros componentes](docs/consumingData.md)
+- [Cómo manejar rutas](https://github.com/rackt/react-router/tree/master/docs)
+
+## Corre las aplicaciones
+
+##### NOTA: en modo 'development', aparece un error en consola que habla sobre ```React.render```, el problema es en el package ```react-resolver``` que sigue usando ```react@0.13.0```. Realmente sólo es un warning y la aplicación seguirá funcionando hasta que salga ```react@0.15.x```.
+
+### Requisitos:
+
+#### Universales:
+- [Node v4.x.x ó mayor](https://nodejs.org/en/) (de preferencia, usar [```nvm```](https://github.com/coreybutler/nvm-windows)) <- Es mejor si usan 4.2.x!
+- [mongoDB](https://www.mongodb.org/) para la base de datos
+- ```npm install -g react-native-cli```
+- Genymotion, si quieres un emulador de Android más nice.
+- [Git, of course](https://git-scm.com/)
+- Si usas Windows, [ConEmu](https://github.com/Maximus5/ConEmu/releases) es el campeón para manejar terminal/consola/bash. [Copia mi configuración](https://gist.github.com/arhcstolen/c158e7992f829a4c6e2e)
+- Prepara tu editor de texto para usar un linter (eslint, en este caso): [Sublime Text](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48) | [Atom](https://atom.io/packages/linter-eslint)
+
+#### para iOS (en Mac):
+- Xcode 6.3 o mayor.
+- instalar ```watchman``` vía ```brew```: ```brew install watchman```
+
+#### para Android:
+- Instalar el SDK Manager de Android y descargar:
+  - Android SDK Build-tools version 23.0.1
+  - Android 6.0 (API 23)
+  - Android Support Repository
+  - (todas las tools para las versiones que queramos soportar)
+
+### Ahora a la acción
+
+Primero:
+
 ```
-  git clone https://github.com/arhcstolen/unijobs.git
-  npm install
-```
-- Tienes que tener instalado mongodb en tu computadora, cuando sea el caso, en terminal:
-```
-  mongod
-```
-- En otro proceso, inicializa la base de datos:
-```
-  npm run seed
-```
-- En modo development (hot reload)
-```
-  npm run dev
+$ git clone https://github.com/arhcstolen/unijobs.git
+$ cd unijobs
 ```
 
-- En modo production (assets comprimidos, minificados, etc).
+#### Para trabajar en la versión web:
 ```
-  npm run start
-```
-- Si estás en windows, el modo producción corre de la siguiente manera:
-```
-  npm run win
+$ cd ./web
+$ npm install
 ```
 
-- Testea la aplicación
+Tienes que tener instalado mongodb en tu computadora, cuando sea el caso, en terminal:
 ```
-  npm run test
+  $ mongod
 ```
 
-- Checar code quality
+En otra terminal, inicializa la base de datos con
 ```
-  npm run lint
+  $ npm run seed
 ```
+
+#### Modos de la aplicación
+
+__Development__ (hot reload, assets sin minificar)
+```
+  $ npm run dev
+```
+
+__Production__ (no hot reload, assets comprimidos, minificados, etc).
+```
+  $ npm run start
+```
+
+__Production__ en _Windows_
+```
+  $ npm run win
+```
+
+__Testing__
+```
+  $ npm run test
+```
+
+__Linting__
+```
+  $ npm run lint
+```
+
+#### Para trabajar en las versiones nativas
+Recuerda que para esto, ya necesitas tener instalado ___react-native-cli___ (checa los Requisitos Universales)
+```
+$ cd ./unijobsNative/
+$ npm install
+$ react-native start //esto inicaliza el packager de React Native
+```
+
+__iOS__
+- Abre ```./ios/unijobsNative.xcodeproj``` en Xcode y dale run para ver la app en el simulador.
+- Abre ```./index.ios.js``` en tu editor y hazle cambios.
+- Dale a ⌘-R en el simulador para refrescar el proyecto y ver los nuevos cambios.
+
+__Android__
+- En otra terminal, ejecuta ```react-native run-android```
 
 ## TODO:
 - Hacer más tests (componentes de React, endpoints de GraphQL, etc).
-- Añadir más queries y madres a GraphQL <-- EN PROGRESO
-- Crear la base de datos <-- LISTO!
-- Conectar el servidor (y GraphQL) con una base de datos (MongoDB) <-- LISTO!
-- Crear rutas (a la REST) para abstraer los queries de GraphQL (no estoy seguro sobre esto)
-- Conectar datos a los componentes de React.
+- Añadir más queries y madres a GraphQL __<-- EN PROGRESO__
+- Crear la base de datos __<-- LISTO!__
+- Conectar el servidor (y GraphQL) con una base de datos (MongoDB) __<-- LISTO!__
+- Crear rutas (a la REST) para abstraer los queries de GraphQL (no estoy seguro sobre esto) __<- LOL, NOPE. NO SE HARÁ__
+- Conectar datos a los componentes de React. __<-- EN PROGRESO__
 - Implementar passwordless para registro de usuarios.
 - Implementar lógica para sólo entrar a rutas estando autenticado.
 - Agregar estilos (pa' que se vea kawaii).
-
-## Usando la API
-
-Tenemos los siguientes tipos de dato para buscar en GraphQL
-
-``` js
-type Usuarios {
-  _id: Int,
-  nombre: String,
-  descripcion: String,
-  intereses: [String],
-  edad: Int,
-  genero: String,
-  correo: String,
-  trabajos: [type Trabajos]
-}
-
-type Empresas {
-  _id: Int,
-  nombre: String,
-  descripcion: String,
-  intereses: [String],
-  trabajosId: [{
-    _id: Int
-  }],
-  trabajos: [type Trabajos]
-}
-
-type Trabajos {
-  _id: Int,
-  titulo: String,
-  descripcion: String,
-  intereses: [String],
-  empresaId: {
-    _id: Int
-  },
-  empresa: type Empresas
-}
-```
-
-### Traer datos
-NOTA: también pueden copiar la url entre comillas que está dentro de fetch, claro, tiene que estar corriendo el server
-
-Vamos a traer el usuario con el id:0 y su nombre
-
-``` js
-
-  fetch('http://localhost:3000/graphql?query={usuario(id:0){nombre}}').then(r => r.json()).then(r => console.log(r));
-
-```
-
-Nosotros podemos decidir específicamente cuales son los datos que necesitamos, y sólo esos nos traerá
-
-Por ejemplo, ahora quiero mucha más información del usuario con id:1
-
-``` js
-  fetch('http://localhost:3000/graphql?query={usuario(id:0){_id,nombre,descripcion,intereses,genero,edad,correo}}').then(r => r.json()).then(r => console.log(r));
-```
-
-Cuando un campo, corresponda a otro tipo, por ejemplo el campo Trabajos en Usuario, se le tiene que especificar qué información se necesita, por ejemplo:
-
-``` js
-  fetch('http://localhost:3000/graphql?query={usuario(id:0){_id,nombre,descripcion,intereses,genero,edad,correo, trabajos{_id,titulo,descripcion,intereses,empresaId{_id}}}}').then(r => r.json()).then(r => console.log(r));
-```
-Esto nos permite hacer consultas extremadamente locas y que, aún así, tengan sentido.
-
-``` js
-
-  fetch('http://localhost:3000/graphql?query={usuario(id:0){_id,nombre,descripcion,intereses,genero,edad,correo,%20trabajos{_id,titulo,descripcion,intereses,empresaId{_id},empresa{_id,nombre,intereses,trabajosId{_id},trabajos{_id,titulo,empresaId{_id},empresa{_id,nombre}}}}}}').then(r => r.json()).then(r => console.log(r));
-```
-
-#### NETA VOY A TENER QUE HACER TODAS ESAS PINCHES CONSULTAS? NO MAMES ABRAHAM, ESTÁS BIEN JODIDO.
-
-Nop, no habrá que hacerlas, sólo es para que vean como funciona y lo prueben :P pero es un WIP
-
-### Creación de datos
-Son unos ejemplos para que vean como funcionan, para ver las entrañas y saber más que onda, chequen los archivos en la carpeta server/api, self-documented el pedo.
-
-- crearUsuario
-  - argumentos:
-    - nombre: String,
-    - edad: Int,
-    - correo: String,
-    - genero: String,
-
-```js
-fetch('http://localhost:3000/graphql?query=mutation{crearUsuario(nombre:"Abraham", correo:"yo@correo.com", edad:20, genero:"hombre")}', {method:"POST"}).then(r => r.json()).then(r => console.log(r))
-```
-
-- actualizarUsuario
-  - argumentos:
-    - id: Int (el usuario que vamos a actualizar)
-    - nombre: String,
-    - descripcion: String,
-    - intereses: [String]
-  - Regresa la versión anterior del usuario, hay que agregar subcampos
-
-```js
-fetch('http://localhost:3000/graphql?query=mutation{actualizarUsuario(id:2, nombre: "Saúl", descripcion:"Un tío demasiado guay", intereses:["programación","javascript","react","php","java"]){_id, nombre,descripcion,genero,edad,intereses}}', {method:"POST"}).then(r => r.json()).then(r => console.log(r))
-```
-
-- borrarUsuario
-  - argumentos:
-    - id: Int (el usuario que vamos a borrar)
-
-```js
-fetch('http://localhost:3000/graphql?query=mutation{borrarUsuario(id:2)}', {method: 'POST'}).then(r => r.json()).then(r => console.log(r));
-```
-
-También se puede hacer todo esto con los trabajos y empresas, peeeero, hay un caso especial
-
-- crearTrabajo
-  - argumentos:
-    - id: Int (ESTE ID ES EL DE LA EMPRESA QUE OFRECE ESTE EMPLEO)
-    - titulo: String
-    - descripcion: String
-    - intereses: [String]
-
-```js
-fetch('http://localhost:3000/graphql?query=mutation{crearTrabajo(id:0,titulo:"Programador en Ruby",descripcion:"Pos que sepa usar Ruby on Rails",intereses:["programación","it","ruby","ruby on rails"])}', {method: 'POST'}).then(r => r.json()).then(r => console.log(r));
-```
+- Implementar Flux architecture (Redux, principalmente), sólo y sólo si es necesario. __<-- SE SIGUE PENSANDO__
 
 ## Links interesantes
+
+### UTILS
+
+[La cagué en un commit, ¿cómo lo arreglo?](http://stackoverflow.com/questions/927358/how-do-you-undo-the-last-commit)
+
+[Fusionar múltiples commits en uno solo](http://stackoverflow.com/questions/2563632/how-can-i-merge-two-commits-into-one)
+
+[Lint like it's 2015](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48)
+
+[Egghead.io](https://egghead.io/)
+
+[Hoja de referencia para Git/GitHub](https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf)
+
+### React Native
+[Awesome React Native](https://github.com/jondot/awesome-react-native)
+
+[React Native on GitHub](https://github.com/facebook/react-native)
+
+[Use React Native](http://www.reactnative.com/)
+
+### NodeJS
+[Awesome Node](https://github.com/sindresorhus/awesome-nodejs)
+
+### Teoría de React
+[React on GitHub](github.com/facebook/react)
 
 [Como usar Clases con ES6 y React](https://medium.com/@dan_abramov/how-to-use-classes-and-sleep-at-night-9af8de78ccb4)
 
 [React: Container Components](https://medium.com/@learnreact/container-components-c0e67432e005#.8684ovp2n)
 
-[GraphQL.org](http://graphql.org/)
-
 [React: Testing](https://medium.com/@MarcFly1103/react-to-changes-with-pure-components-caa761836e9f#.s8mzea356)
 
 [React Router](https://github.com/rackt/react-router)
 
-[Testing con Tape](https://medium.com/javascript-scene/why-i-use-tape-instead-of-mocha-so-should-you-6aa105d8eaf4)
-
 [Teoría de Higher Order Functions/Components](https://blog.risingstack.com/functional-ui-and-components-as-higher-order-functions/)
-
-[Aswesome GraphQL](https://github.com/chentsulin/awesome-graphql)
-
-[Aprende ES6 a fondo](https://ponyfoo.com/articles/tagged/es6-in-depth)
-
-[Awesome React](https://github.com/enaqx/awesome-react)
-
-[La cagué en un commit, ¿cómo lo arreglo?](http://stackoverflow.com/questions/927358/how-do-you-undo-the-last-commit)
-
-[Lint like it's 2015](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48)
-
-[Egghead.io](https://egghead.io/)
 
 [Creando una app robusta con React](http://maketea.co.uk/2014/03/05/building-robust-web-apps-with-react-part-1.html)
 
@@ -205,17 +160,38 @@ fetch('http://localhost:3000/graphql?query=mutation{crearTrabajo(id:0,titulo:"Pr
 
 [Higher Order Components](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
 
-## Contribuciones
+[Awesome React](https://github.com/enaqx/awesome-react)
 
-1. Hazle fork a este repo.
-2. Clona el fork.
-3. Añade como remoto este repo para estar bajando las nuevas actualizaciones.
-4. Se recomienda hacer cambios y experimentos en otras ramas y luego fusionar con master.
-5. Constantemente baja los cambios del repo original y fusionalos con el master de tu fork (!importante).
-6. Fusiona tus ramas experimentales con tu master.
-7. Sube los cambios al fork y de ahí haz un pull request describiendo todos los cambios.
-8. Posiblemente haya que reordenar mejor los archivos y (nombres y locaciones).
-9. Si hay problemas, abrir un issue en el repo original y detallarlo.
+### GraphQL
+
+[GraphQL.org](http://graphql.org/)
+
+[Aswesome GraphQL](https://github.com/chentsulin/awesome-graphql)
+
+[Learn GraphQL](learngraphql.com)
+
+### Testing
+
+[Testing con Tape](https://medium.com/javascript-scene/why-i-use-tape-instead-of-mocha-so-should-you-6aa105d8eaf4)
+
+[React to Changes with Pure Components](https://medium.com/@MarcFly1103/react-to-changes-with-pure-components-caa761836e9f)
+
+[5 Preguntas que cada Unit Test debe responder](https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d)
+
+### EcmaScript 6 y JavaScript en general
+
+[Aprende ES6 a fondo](https://ponyfoo.com/articles/tagged/es6-in-depth)
+
+[You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+
+## Cómo contribuir
+
+1. Clona el repo
+2. Crea una rama para los cambios y trabaja ahí.
+3. Recuerda estar checando los cambios en master.
+4. Cuando haya cambios en master, fusiónalos con los de tu rama experimental.
+5. Cuando esté lista, sube la rama al repo y haz un pull request desde ahí.
+6. Si encuentras un problema, abre un issue y escribe cómo sucedio, bajo que circunstancias, para poder replicarlo y ayudarnos entre todos.
 
 **Protip:** hagan ```git rebase``` para fusionar los cambios, es mejor que ```git merge```
 

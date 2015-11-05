@@ -1,5 +1,6 @@
 node_modules
 frontend/build
+docs
 webpack.config.development.babel.js
 webpack.config.production.babel.js
 test

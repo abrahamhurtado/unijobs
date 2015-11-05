@@ -1,4 +1,4 @@
-export default (Component) => `
+export default (Component, state) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -8,7 +8,10 @@ export default (Component) => `
     </head>
     <body>
       <div id="react-app">${Component}</div>
-      <script type="text/javascript" src="/static/bundle.js"></script>
+      <script type="text/javascript" src="/static/bundle.js" async defer></script>
+      <script type="application/javascript">
+        window.__REACT_RESOLVER_PAYLOAD__ = ${JSON.stringify(state)};
+      </script>
     </body>
   </html>
   `;
