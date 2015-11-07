@@ -11,5 +11,4 @@ match({routes, location}, (err, redirectLocation, props) => {
   Resolver.render(() => (
     Component
   ), document.getElementById('react-app'));
-  // render(Component, document.getElementById('react-app'));
 });

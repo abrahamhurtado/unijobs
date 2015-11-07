@@ -3,6 +3,8 @@ Repositorio del proyecto de UniJOBS
 
 Ahora, en el repo de UniJOBS se encuentran dos proyectos: las versiones nativas para iOS y Android en ```./unijobsNative``` y la versión web en ```./web```, junto con el servidor que alimentará a todas las aplicaciones.
 
+## Por favor, hagan commits separados para la verisón web y nativa. _'Prefixeen'_ [Web] para la versión web y [Native-iOS] o [Native-Android] para las versiones nativas.
+
 ## DOCS
 
 - [Updrage Guide](docs/upgrade.md)
