@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class SingUp extends React.Component {
+export default class SignUp extends React.Component {
   render () {
     return (
       <form>
@@ -10,4 +10,4 @@ export default class SingUp extends React.Component {
       </form>
     );
   }
-};
+}

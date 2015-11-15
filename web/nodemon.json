@@ -15,7 +15,8 @@
   "watch": [
     "frontend",
     "shared",
-    "server"
+    "server",
+    "./server.js"
   ],
   "env": {
     "NODE_ENV": "development"

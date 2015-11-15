@@ -12,6 +12,7 @@ export default {
   childRoutes: [
     require('../frontend/routes/Children'),
     { path: '/login', component: Login },
-    { path: '/signup', component: SignUp }
+    { path: '/signup', component: SignUp },
+    require('../frontend/routes/Confirmation')
   ]
 };
