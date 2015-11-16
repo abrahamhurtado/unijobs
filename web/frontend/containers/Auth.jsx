@@ -3,7 +3,11 @@ import React from 'react';
 export default (Component) => {
   class ProtectedComponent extends React.Component {
     static contextTypes = {
-      isAuthed: React.PropTypes.bool
+      isAuthed: React.PropTypes.bool,
+      user: React.PropTypes.shape({
+        name: React.PropTypes.string,
+        _id: React.PropTypes.number
+      })
     }
     constructor (props, context) {
       super(props, context);
@@ -19,7 +23,7 @@ export default (Component) => {
       }
     }
     render () {
-      return <Component {...this.context} />;
+      return <Component {...this.context} {...this.props} />;
     }
   }
 

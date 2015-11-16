@@ -13,6 +13,7 @@ export default {
     require('../frontend/routes/Children'),
     { path: '/login', component: Login },
     { path: '/signup', component: SignUp },
-    require('../frontend/routes/Confirmation')
+    require('../frontend/routes/Confirmation'),
+    require('../frontend/routes/Job')
   ]
 };
