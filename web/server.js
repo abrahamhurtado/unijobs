@@ -35,7 +35,9 @@ mongoose.connect('mongodb://localhost/unijobs');
 
 app.use(helmet());
 app.use(compression());
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  type: 'application/json'
+}));
 app.use(bodyParser.urlencoded({
   extended: true
 }));

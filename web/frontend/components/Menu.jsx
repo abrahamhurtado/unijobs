@@ -17,7 +17,7 @@ let userIsLoggedMenu = (props) => {
     <ul>
       <li><Link to="/">Home</Link></li>
       <li><Link to="/ofertas">Ofertas</Link></li>
-      <li><Link to="/login" state={{ modal: true, returnTo: props.location.pathname }}>Log out</Link></li>
+      <li><Link to="/signout">Log out</Link></li>
     </ul>
   );
 };

@@ -1,4 +1,4 @@
-export default (Component, state, token) => `
+export default (Component, state) => `
   <!DOCTYPE html>
   <html>
     <head>
@@ -11,7 +11,6 @@ export default (Component, state, token) => `
       <script type="text/javascript" src="/static/bundle.js" async defer></script>
       <script type="application/javascript">
         window.__initialData__ = ${JSON.stringify(state)};
-        window.localStorage.token = ${token};
       </script>
     </body>
   </html>
