@@ -53,4 +53,18 @@ router.post('/signUserOut', (req, res) => {
   res.status(200).json({mensaje: 'Se cerró la sesión'});
 });
 
+router.post('/checkAuth', (req, res) => {
+  if (req.cookies.token) {
+    jwt.verify(req.cookies.token, 'unijobs', (err, success) => {
+      if (err) {
+        res.status(404).json({auth: 'false'});
+      } else if (success) {
+        res.status(200).json({auth: 'true'});
+      }
+    });
+  } else {
+    res.status(404).json({auth: 'false'});
+  }
+});
+
 export default router;
