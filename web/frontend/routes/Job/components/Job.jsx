@@ -17,7 +17,7 @@ let Job = (props) => {
         <h4>Más ofertas de {empresa.nombre}:</h4>
         <ul>
           {empresa.trabajos.map((trabajo, key) => (
-            <li key={`${Date.now()}_${key}`}>
+            <li key={`${Date.now()}_${key}_${trabajo._id}`}>
               <Link to={`/trabajo/${trabajo._id}`}>
                 {trabajo.titulo}
               </Link>

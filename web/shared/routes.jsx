@@ -63,6 +63,9 @@ export default {
     { path: '/signup', component: SignUp },
     { path: '/signout', onEnter: logout, component: Login },
     require('../frontend/routes/Confirmation'),
-    require('../frontend/routes/Job')
+    require('../frontend/routes/Job'),
+    require('../frontend/routes/Empresa'),
+    require('../frontend/routes/Usuario'),
+    require('../frontend/routes/TrabajoKeyword')
   ]
 };

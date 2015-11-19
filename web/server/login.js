@@ -15,7 +15,7 @@ router.post('/logUser', (req, res) => {
       Business.find({correo}, (err2, empresa) => {
         if (empresa.length > 0) {
           let {nombre, _id, correo} = empresa;
-          let token = jwt.sign({nombre, _id}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
+          let token = jwt.sign({nombre, _id, tipo: 'empresa'}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
           enviarCorreo(token, nombre, correo);
         } else {
           res.status(404).json({mensaje: 'No existe un usuario con este correo'});
@@ -23,7 +23,7 @@ router.post('/logUser', (req, res) => {
       });
     } else if (usuario.length > 0) {
       let {nombre, _id, correo} = usuario[0];
-      let token = jwt.sign({nombre, _id}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
+      let token = jwt.sign({nombre, _id, tipo: 'usuario'}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
       enviarCorreo(token, nombre, correo);
       res.status(202).json({mensaje: 'Se envió el correo'});
     } else {
