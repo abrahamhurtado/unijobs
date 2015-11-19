@@ -39,14 +39,15 @@ export default class Login extends React.Component {
     return (
       <div>
         <form
+          className="login-form"
           action="/logUser"
           method="post"
           onSubmit={this.onSubmit.bind(this)}
         >
           {(!this.state.mensaje) ? (
-            <p>Ingresa tu correo electrónico para registrarte</p>
+            <p>Ingresa tu correo electrónico para iniciar sesión</p>
           ) : (
-            <p>{`${this.state.mensaje}`}</p>
+            <p className="successMessage">{`${this.state.mensaje}`}</p>
           )}
           <input
             ref="mail"

@@ -62,7 +62,7 @@ export default class SignUp extends React.Component {
             <input type="email" name="correo" placeholder="mail@example.com"/>
             <input type="number" name="edad" placeholder="Tu edad"/>
             <input type="text" name="genero" placeholder="Tu genero"/>
-            <button type="submit">Inicia sesión</button>
+            <button type="submit">Crear cuenta</button>
           </form>
         ) : null }
         {(this.state.success) ? (

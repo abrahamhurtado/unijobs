@@ -11,19 +11,20 @@ let router = express.Router();
 router.post('/logUser', (req, res) => {
   const {correo} = req.body;
   User.find({correo}, (err, usuario) => {
-    if (err) {
+    if (err || usuario.length === 0) {
       Business.find({correo}, (err2, empresa) => {
         if (empresa.length > 0) {
-          let {nombre, _id, correo} = empresa;
-          let token = jwt.sign({nombre, _id}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
+          let {nombre, _id, correo} = empresa[0];
+          let token = jwt.sign({nombre, _id, type: 'empresa'}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
           enviarCorreo(token, nombre, correo);
+          res.status(202).json({mensaje: 'Se envió el correo'});
         } else {
           res.status(404).json({mensaje: 'No existe un usuario con este correo'});
         }
       });
     } else if (usuario.length > 0) {
       let {nombre, _id, correo} = usuario[0];
-      let token = jwt.sign({nombre, _id}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
+      let token = jwt.sign({nombre, _id, type: 'usuario'}, 'unijobs', {algorithm: 'HS512', expiresIn: 31536000});
       enviarCorreo(token, nombre, correo);
       res.status(202).json({mensaje: 'Se envió el correo'});
     } else {
@@ -35,11 +36,12 @@ router.post('/logUser', (req, res) => {
 router.get('/confirm/:token/:expiration', (req, res) => {
   const {token, expiration} = req.params;
   if (isLinkExpired(expiration)) {
-    res.redirect('/accountConfirmation');
+    res.redirect(`/accountConfirmation/${token}/${expiration}`);
   } else {
     jwt.verify(token, 'unijobs', (err, success) => {
       if (err) {
-        res.status(404).redirect('/accountConfirmation');
+        console.log(err);
+        res.status(404).redirect(`/accountConfirmation/${token}/${expiration}`);
       } else if (success) {
         res.cookie('token', req.params.token, {path: '/', maxAge: 1296000000, httpOnly: true});
         res.redirect(`/accountConfirmation/${token}/${expiration}`);

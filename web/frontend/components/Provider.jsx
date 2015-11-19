@@ -6,7 +6,8 @@ export default class Provider extends React.Component {
     user: PropTypes.shape({
       name: PropTypes.string,
       _id: PropTypes.number
-    })
+    }),
+    type: PropTypes.string
   }
 
   constructor (props) {
@@ -17,7 +18,8 @@ export default class Provider extends React.Component {
   getChildContext () {
     return {
       isAuthed: this.initialData.isAuthed,
-      user: this.initialData.user
+      user: this.initialData.user,
+      type: this.initialData.type
     };
   }
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import App from '../frontend/containers/App';
 import Login from '../frontend/components/Login';
-import SignUp from '../frontend/components/SignUp';
+import Landing from '../frontend/components/Landing';
 import fetch from 'isomorphic-fetch';
 import jwt from 'jsonwebtoken';
-
-let HolaMundo = (props) => <h2>{`Hola, Mundo`}</h2>;
 
 function logout (nextState, replaceState) {
   fetch('/signUserOut', {
@@ -53,16 +51,37 @@ function requireAuth (nextState, replaceState) {
   }
 }
 
+function forceRefresh (Component) {
+  return class ForceRefresh extends React.Component {
+    constructor (props) {
+      super(props);
+    }
+    componentDidMount () {
+      this.props.history.pushState(null, '/login');
+    }
+    render () {
+      return <Component {...this.props} />
+    }
+  }
+}
+
 export default {
   path: '/',
   component: App,
-  indexRoute: {component: HolaMundo},
+  indexRoute: {component: Landing},
   childRoutes: [
     require('../frontend/routes/Children'),
     { path: '/login', component: Login },
-    { path: '/signup', component: SignUp },
-    { path: '/signout', onEnter: logout, component: Login },
+    { path: '/signout', onEnter: logout, component: forceRefresh(Login) },
     require('../frontend/routes/Confirmation'),
-    require('../frontend/routes/Job')
+    require('../frontend/routes/Job'),
+    require('../frontend/routes/Empresa'),
+    require('../frontend/routes/Usuario'),
+    require('../frontend/routes/TrabajoKeyword'),
+    require('../frontend/routes/Perfil'),
+    require('../frontend/routes/Editar'),
+    require('../frontend/routes/SignUp'),
+    require('../frontend/routes/Dashboard'),
+    require('../frontend/routes/CrearTrabajo')
   ]
 };

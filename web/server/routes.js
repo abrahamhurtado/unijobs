@@ -15,6 +15,7 @@ export default () => (req, res) => {
       nombre: '',
       _id: 0
     },
+    type: '',
     token: ''
   };
 
@@ -32,6 +33,7 @@ export default () => (req, res) => {
             initialData.isAuthed = true;
             initialData.user.nombre = success.nombre;
             initialData.user._id = success._id;
+            initialData.type = success.type;
             initialData.token = req.cookies.token;
           }
           res.status(200).send(html(renderToString(

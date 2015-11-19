@@ -51,17 +51,15 @@
     "history": "1.12.5",
     "isomorphic-fetch": "2.2.0",
     "jsonwebtoken": "5.4.1",
+    "lodash.isequal": "3.0.4",
     "mongoose": "4.2.3",
     "morgan": "1.6.1",
     "nodemailer": "1.8.0",
     "object-assign": "4.0.1",
-    "passwordless": "1.1.0",
     "react": "0.14.0",
     "react-dom": "0.14.0",
     "react-resolver": "2.0.5",
-    "react-router": "1.0.0-rc3"
-  },
-  "pre-commit": [
-    "validate"
-  ]
+    "react-router": "1.0.0-rc3",
+    "react-tagsinput": "3.0.2"
+  }
 }

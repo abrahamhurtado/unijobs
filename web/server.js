@@ -54,6 +54,7 @@ app.use(session({
 }));
 
 app.use('/static', express.static('./frontend/build/'));
+app.use('/styles', express.static('./frontend/styles/'));
 
 app.use('/graphql', graphqlHTTP({ schema, pretty: true }));
 

@@ -25,7 +25,9 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <Menu {...this.props} />
+        <header>
+          <Menu {...this.props} />
+        </header>
         {isModal ?
           this.previousChildren :
           this.props.children

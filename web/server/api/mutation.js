@@ -19,11 +19,12 @@ const Mutations = new GraphQLObjectType({
       args: {
         id: {type: new GraphQLNonNull(GraphQLInt)},
         nombre: {type: GraphQLString},
-        intereses: {type: new GraphQLList(GraphQLString)},
+        intereses: {type: GraphQLString},
         descripcion: {type: GraphQLString}
       },
       resolve (parent, {id, nombre, descripcion, intereses}) {
-        return User.findByIdAndUpdate(id, {nombre, descripcion, intereses});
+        const interesesBien = intereses.split(',');
+        return User.findByIdAndUpdate(id, {nombre, descripcion, intereses: interesesBien});
       }
     },
     crearUsuario: {
@@ -36,6 +37,15 @@ const Mutations = new GraphQLObjectType({
         genero: {type: new GraphQLNonNull(GraphQLString)}
       },
       resolve (parent, {nombre, correo, edad, genero}) {
+        Business.find({correo}, (err, docs) => {
+          if (err || docs.length > 0) {
+            return new Error('Ya existe un usuario con este correo');
+          } else {
+            User.find({correo}, (err2, docs2) => {
+              if (err || docs2.length > 0) return new Error('Ya existe un usuario con este correo');
+            })
+          }
+        });
         return User.create({nombre, correo, edad, genero});
       }
     },
@@ -59,7 +69,8 @@ const Mutations = new GraphQLObjectType({
         intereses: {type: new GraphQLNonNull(new GraphQLList(GraphQLString)), description: 'Las características que se buscan en los aspirantes'}
       },
       resolve (parent, {id, titulo, descripcion, intereses}) {
-        return Job.create({titulo, descripcion, intereses, empresaId: {_id: id}});
+        const interesesBien = intereses.split(',');
+        return Job.create({titulo, descripcion, intereses: interesesBien, empresaId: {_id: id}, activo: true});
       }
     },
     actualizarTrabajo: {
@@ -71,8 +82,9 @@ const Mutations = new GraphQLObjectType({
         descripcion: {type: GraphQLString},
         intereses: {type: new GraphQLList(GraphQLString)}
       },
-      resolve (parent, args) {
-        return Job.findByIdAndUpdate(args.id, {titulo: args.titulo, descripcion: args.descripcion, intereses: args.intereses});
+      resolve (parent, {id, titulo, descripcion, intereses}) {
+        const interesesBien = intereses.split(',');
+        return Job.findByIdAndUpdate(id, {titulo, descripcion, intereses: interesesBien});
       }
     },
     crearEmpresa: {
@@ -81,10 +93,21 @@ const Mutations = new GraphQLObjectType({
       args: {
         nombre: {type: new GraphQLNonNull(GraphQLString)},
         descripcion: {type: new GraphQLNonNull(GraphQLString)},
-        intereses: {type: new GraphQLNonNull(new GraphQLList(GraphQLString))}
+        intereses: {type: new GraphQLNonNull((GraphQLString))},
+        correo: {type: new GraphQLNonNull(GraphQLString)}
       },
-      resolve (parent, {nombre, descripcion, intereses}) {
-        return Business.create({nombre, descripcion, intereses});
+      resolve (parent, {nombre, descripcion, intereses, correo}) {
+        User.find({correo}, (err, docs) => {
+          if (err || docs.length > 0) {
+            return new Error('Ya existe un usuario con este correo');
+          } else {
+            Business.find({correo}, (err2, docs2) => {
+              if (err || docs2.length > 0) return new Error('Ya existe un usuario con este correo');
+            })
+          }
+        });
+        const interesesBien = intereses.split(',');
+        return Business.create({nombre, descripcion, intereses: interesesBien, correo});
       }
     },
     actualizarEmpresa: {
@@ -97,7 +120,8 @@ const Mutations = new GraphQLObjectType({
         intereses: {type: new GraphQLList(GraphQLString)}
       },
       resolve (parent, {id, nombre, descripcion, intereses}) {
-        return Business.findByIdAndUpdate(id, {nombre, descripcion, intereses});
+        const interesesBien = intereses.split(',');
+        return Business.findByIdAndUpdate(id, {nombre, descripcion, intereses: interesesBien});
       }
     }
   }
