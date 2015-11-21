@@ -6,8 +6,9 @@ export default (Component) => {
       isAuthed: React.PropTypes.bool,
       user: React.PropTypes.shape({
         name: React.PropTypes.string,
-        _id: React.PropTypes.number
-      })
+        _id: React.PropTypes.number,
+      }),
+      type: React.PropTypes.string
     }
     constructor (props, context) {
       super(props, context);

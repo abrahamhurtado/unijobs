@@ -4,14 +4,9 @@ import { Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import ProtectedComponent from '../../../containers/Auth';
 
-class Usuario extends React.Component {
-  constructor (props) {
-    super(props);
-  }
-  componentWillMount () {
-    if (this.props.payload.data.usuario === null) {
-      this.props.history.pushState(null, '/');
-    }
+class Perfil extends React.Component {
+  constructor (props, context) {
+    super(props, context);
   }
   render () {
     const { usuario } = this.props.payload.data;
@@ -31,22 +26,26 @@ class Usuario extends React.Component {
             </li>
           ))}
         </ul>
+        <Link to="/perfil/editar">
+          Editar perfil
+        </Link>
       </article>
-    )
+    );
   }
 }
 
 export default ProtectedComponent(resolve('payload', (props) => {
+  const { _id } = props.user;
   let query = `
     {
-      usuario(id:${Number(props.params.id)}) {
-        _id,
+      usuario(id:${Number(_id)}) {
         nombre,
-        intereses,
-        descripcion
+        _id,
+        descripcion,
+        intereses
       }
     }
   `;
 
   return fetch(`/graphql?query=${query.trim()}`).then((r) => r.json());
-})(Usuario));
+})(Perfil))

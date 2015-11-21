@@ -68,8 +68,20 @@ const empresas = new GraphQLObjectType({
       description: 'Los intereses de las empresas'
     },
     descripcion: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'Información acerca de la empresa'
+    },
+    correo: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'El correo de la compañía'
+    },
+    usuarios: {
+      type: new GraphQLList(usuarios),
+      description: 'Los usuarios que pueden interesar a la empresa',
+      resolve (parent, args) {
+        return User.find({})
+            .where('intereses').in(parent.intereses);
+      }
     },
     trabajosId: {
       type: new GraphQLList(new GraphQLObjectType({
@@ -108,6 +120,30 @@ const trabajos = new GraphQLObjectType({
     descripcion: {
       type: GraphQLString,
       description: 'La información sobre el trabajo.'
+    },
+    publicacion: {
+      type: GraphQLInt,
+      description: 'Momento de publicación del trabajo'
+    },
+    interesadosId: {
+      type: new GraphQLList(new GraphQLObjectType({
+        name: 'UsuariosID',
+        fields: () => ({
+          _id: {
+            type: GraphQLInt
+          }
+        })
+      }))
+    },
+    interesados: {
+      type: new GraphQLList(usuarios),
+      description: 'Los intersados en esta oferta de trabajo',
+      resolve (parent, args) {
+        Job.find({_id: parent._id}, (err, docs) => {
+          const Users = docs[0].interesadosId.map((user) => User.findById(user._id));
+          return Users;
+        })
+      }
     },
     empresaId: {
       type: new GraphQLObjectType({

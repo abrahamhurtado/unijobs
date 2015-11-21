@@ -53,6 +53,20 @@ function requireAuth (nextState, replaceState) {
   }
 }
 
+function forceRefresh (Component) {
+  return class ForceRefresh extends React.Component {
+    constructor (props) {
+      super(props);
+    }
+    componentDidMount () {
+      this.props.history.pushState(null, '/login');
+    }
+    render () {
+      return <Component {...this.props} />
+    }
+  }
+}
+
 export default {
   path: '/',
   component: App,
@@ -60,12 +74,15 @@ export default {
   childRoutes: [
     require('../frontend/routes/Children'),
     { path: '/login', component: Login },
-    { path: '/signup', component: SignUp },
-    { path: '/signout', onEnter: logout, component: Login },
+    { path: '/signout', onEnter: logout, component: forceRefresh(Login) },
     require('../frontend/routes/Confirmation'),
     require('../frontend/routes/Job'),
     require('../frontend/routes/Empresa'),
     require('../frontend/routes/Usuario'),
-    require('../frontend/routes/TrabajoKeyword')
+    require('../frontend/routes/TrabajoKeyword'),
+    require('../frontend/routes/Perfil'),
+    require('../frontend/routes/Editar'),
+    require('../frontend/routes/SignUp'),
+    require('../frontend/routes/Dashboard')
   ]
 };

@@ -14,6 +14,18 @@ let Job = (props) => {
       <h3>publicado por <Link to={`/empresa/${empresa._id}`}>{empresa.nombre}</Link></h3>
       <p>{trabajo.descripcion}</p>
       <div>
+        <p>Etiquetas:</p>
+        <ul>
+          {trabajo.intereses.map((interes, key) => (
+            <li key={`${Date.now()}_${key}_${interes}}`}>
+              <Link to={`/trabajo/clave/${interes}`}>
+                {interes}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
         <h4>Más ofertas de {empresa.nombre}:</h4>
         <ul>
           {empresa.trabajos.map((trabajo, key) => (
@@ -29,5 +41,5 @@ let Job = (props) => {
   );
 };
 export default ProtectedComponent(resolve('payload', (props) => {
-  if (props.isAuthed) return fetch(`/graphql?query={trabajo(id:${Number(props.params.id)}){_id,titulo,descripcion,empresa{_id,nombre,trabajos{_id,titulo}}}}`).then((r) => r.json());
+  if (props.isAuthed) return fetch(`/graphql?query={trabajo(id:${Number(props.params.id)}){_id,titulo,descripcion,intereses,publicacion,empresa{_id,nombre,trabajos{_id,titulo}}}}`).then((r) => r.json());
 })(Job));
