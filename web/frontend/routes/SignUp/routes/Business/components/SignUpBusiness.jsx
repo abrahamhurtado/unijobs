@@ -82,26 +82,20 @@ export default class SignUpUsers extends React.Component {
     const intereses = [];
     return (
       <div>
-        {(this.state.error && this.state.message) ? (<p>{this.state.message}</p>) : null }
-        {(this.state.success) ? (<p>Fue un éxito, papus :)</p>) : null }
+        {(this.state.error && this.state.message) ? (<p className="errorMessage">{this.state.message}</p>) : null }
+        {(this.state.success) ? (<p className="successMessage">Se creó el usuario</p>) : null }
         {(!this.state.error && !this.state.success || !this.state.success) ? (
           <form onSubmit={this.onSubmit.bind(this)}>
             <p>Ingresa tú información</p>
             <label>Nombre</label>
-            <p></p>
             <input required type="text" name="nombre" placeholder="El nombre de la empresa"/>
-            <p></p>
             <label>Correo</label>
-            <p></p>
             <input required type="email" name="correo" placeholder="mail@example.com"/>
-            <p></p>
             <label>Descripción de la empresa</label>
-            <p></p>
             <textarea required name="descripcion" placeholder="Descripción de la empresa"/>
-            <p></p>
             <label>¿Cuáles son las áreas de interés de tu empresa?</label>
             <Tags ref="tags" intereses={intereses} />
-            <button type="submit">Inicia sesión</button>
+            <button type="submit">Crear cuenta</button>
           </form>
         ) : null }
         {(this.state.success) ? (

@@ -1,6 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
+    'use strict';
+    var O = Object(this);
+    var len = parseInt(O.length) || 0;
+    if (len === 0) {
+      return false;
+    }
+    var n = parseInt(arguments[1]) || 0;
+    var k;
+    if (n >= 0) {
+      k = n;
+    } else {
+      k = len + n;
+      if (k < 0) {k = 0;}
+    }
+    var currentElement;
+    while (k < len) {
+      currentElement = O[k];
+      if (searchElement === currentElement ||
+         (searchElement !== searchElement && currentElement !== currentElement)) {
+        return true;
+      }
+      k++;
+    }
+    return false;
+  };
+}
+
 export default class JobsList extends React.Component {
   constructor (props) {
     super(props);
@@ -26,9 +55,10 @@ export default class JobsList extends React.Component {
               </Link>
               <p>{trabajo.descripcion}</p>
               <ul>
-                <li>Intereses: </li>
+                <li className="oferta-tags-1">Intereses: </li>
                 {trabajo.intereses.map((interes, key) => (
-                  <li key={`${Date.now()}_interes_${key}`}>
+                  <li
+                  className="oferta-tags" key={`${Date.now()}_interes_${key}`}>
                     <Link to={`/trabajo/clave/${interes}`}>
                       {interes}
                     </Link>

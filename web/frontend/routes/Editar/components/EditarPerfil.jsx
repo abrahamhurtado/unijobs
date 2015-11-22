@@ -51,7 +51,7 @@ class EditarPerfil extends React.Component {
   renderBusinessForm () {
     const { nombre, descripcion, intereses, trabajos } = this.props.payload.data.empresa;
     return (
-      <div>
+      <div className="login-form">
         <h2>Edita tu perfil, {nombre}</h2>
         <form onSubmit={this.updateBusiness.bind(this)}>
           <label>
@@ -104,7 +104,7 @@ class EditarPerfil extends React.Component {
   renderUserForm () {
     const { nombre, descripcion, intereses, edad, genero } = this.props.payload.data.usuario;
     return (
-      <div>
+      <div className="login-form">
         <h2>Edita tu perfil, {nombre}</h2>
         <form onSubmit={this.updateUser.bind(this)}>
           <label>
@@ -118,8 +118,8 @@ class EditarPerfil extends React.Component {
             defaultValue={nombre}
           />
           <p></p>
-          <label>Edad: </label><input type="number" name="edad" defaultValue={edad} />
-          <label>Genero: </label><input type="text" name="genero" defaultValue={genero} />
+          <label>Edad: </label><input type="number" name="edad" defaultValue={edad} required />
+          <label>Genero: </label><input type="text" required name="genero" defaultValue={genero} />
           <p></p>
           <label>
             Descripción

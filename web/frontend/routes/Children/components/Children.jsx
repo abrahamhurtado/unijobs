@@ -22,11 +22,14 @@ class Children extends React.Component {
     const {trabajos} = this.props.payload.data;
     return (
       <div>
-        <input
+        <div className="filterSearchTextContainer">
+          <h3>Busca trabajos mediante alguna palabra clave: </h3>
+          <input
           type="text"
-          placeholder="Busca un término, ya sea una palabra clave, o el nombre de una empresa"
+          placeholder=""
           onChange={ this.onChange.bind(this) }
         />
+        </div>
         <JobsList
           trabajos={ trabajos }
           filterText={ this.state.filterText }
@@ -36,7 +39,7 @@ class Children extends React.Component {
   }
 }
 
-export default (resolve('payload', (props) => {
+export default resolve('payload', (props) => {
   let query = `
     {
       trabajos {
@@ -51,5 +54,5 @@ export default (resolve('payload', (props) => {
       }
     }
   `;
-  if (props.isAuthed) return fetch(`/graphql?query=${query.trim()}`).then((r) => r.json());
-})(Children));
+  return fetch(`/graphql?query=${query.trim()}`).then((r) => r.json());
+})(Children);

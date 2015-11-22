@@ -9,7 +9,12 @@ class Perfil extends React.Component {
     super(props, context);
   }
   render () {
-    const { usuario } = this.props.payload.data;
+    let usuario;
+    if (this.props.payload.data.usuario) {
+      usuario = this.props.payload.data.usuario
+    } else if (this.props.payload.data.empresa) {
+      usuario = this.props.payload.data.empresa;
+    }
     return (
       <article>
         <image src="https://pbs.twimg.com/profile_images/661230840014245889/9tF0hL1Z.png" />
@@ -17,16 +22,16 @@ class Perfil extends React.Component {
         <h3>{`Acerca de ${usuario.nombre}`}</h3>
         <p>{usuario.descripcion}</p>
         <h3>{`A ${usuario.nombre} le interesan los siguientes tópicos:`}</h3>
-        <ul>
+        <ul style={{marginLeft:30}}>
           {usuario.intereses.map((interes, key) => (
-            <li key={`${Date.now()}_${key}`}>
+            <li className="oferta-tags" key={`${Date.now()}_${key}`}>
               <Link to={`/trabajo/clave/${interes}`}>
                 {interes}
               </Link>
             </li>
           ))}
         </ul>
-        <Link to="/editarperfil">
+        <Link className="link-fix" to="/editarperfil">
           Editar perfil
         </Link>
       </article>
@@ -35,17 +40,33 @@ class Perfil extends React.Component {
 }
 
 export default ProtectedComponent(resolve('payload', (props) => {
-  const { _id } = props.user;
-  let query = `
-    {
-      usuario(id:${Number(_id)}) {
-        nombre,
-        _id,
-        descripcion,
-        intereses
+  if (props.type === "usuario") {
+    const { _id } = props.user;
+    let query = `
+      {
+        usuario(id:${Number(_id)}) {
+          nombre,
+          _id,
+          descripcion,
+          intereses
+        }
       }
-    }
-  `;
+    `;
 
-  return fetch(`/graphql?query=${query.trim()}`).then((r) => r.json());
+    return fetch(`/graphql?query=${query.trim()}`).then((r) => r.json());
+  } else if (props.type === "empresa") {
+    const { _id } = props.user;
+    let query = `
+      {
+        empresa(id:${Number(_id)}) {
+          nombre,
+          _id,
+          descripcion,
+          intereses
+        }
+      }
+    `;
+
+    return fetch(`/graphql?query=${query.trim()}`).then((r) => r.json());
+  }
 })(Perfil))

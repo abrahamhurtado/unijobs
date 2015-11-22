@@ -25,9 +25,10 @@ let UserDashboard = (props) => {
               </Link>
               <p>{trabajo.descripcion}</p>
               <ul>
-                <li>Intereses: </li>
+                <li className="oferta-tags-1">Intereses: </li>
                 {trabajo.intereses.map((interes, key) => (
-                  <li key={`${Date.now()}_interes_${key}`}>
+                  <li
+                  className="oferta-tags" key={`${Date.now()}_interes_${key}`}>
                     <Link to={`/trabajo/clave/${interes}`}>
                       {interes}
                     </Link>
@@ -55,9 +56,10 @@ let UserDashboard = (props) => {
               </Link>
               <p>{trabajo.descripcion}</p>
               <ul>
-                <li>Intereses: </li>
+                <li className="oferta-tags-1">Intereses: </li>
                 {trabajo.intereses.map((interes, key) => (
-                  <li key={`${Date.now()}_interes_${key}`}>
+                  <li
+                  className="oferta-tags" key={`${Date.now()}_interes_${key}`}>
                     <Link to={`/trabajo/clave/${interes}`}>
                       {interes}
                     </Link>

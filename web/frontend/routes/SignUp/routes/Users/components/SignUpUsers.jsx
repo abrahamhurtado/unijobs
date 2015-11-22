@@ -79,20 +79,24 @@ export default class SignUpUsers extends React.Component {
   render () {
     return (
       <div>
-        {(this.state.error && this.state.message) ? (<p>{this.state.message}</p>) : null }
-        {(this.state.success) ? (<p>Fue un éxito, papus :)</p>) : null }
+        {(this.state.error && this.state.message) ? (<p className="errorMessage">{this.state.message}</p>) : null }
+        {(this.state.success) ? (<p className="successMessage">¡Se creó el usuario!</p>) : null }
         {(!this.state.error && !this.state.success || !this.state.success) ? (
           <form onSubmit={this.onSubmit.bind(this)}>
             <p>Ingresa tú información</p>
-            <input type="text" name="nombre" placeholder="Tu nombre"/>
-            <input type="email" name="correo" placeholder="mail@example.com"/>
-            <input type="number" name="edad" placeholder="Tu edad"/>
-            <input type="text" name="genero" placeholder="Tu genero"/>
-            <button type="submit">Inicia sesión</button>
+            <label>Nombre</label>
+            <input required type="text" name="nombre" placeholder="Tu nombre"/>
+            <label>Correo</label>
+            <input required type="email" name="correo" placeholder="mail@example.com"/>
+            <label>Edad</label>
+            <input required type="number" name="edad" placeholder="Tu edad"/>
+            <label>Edad</label>
+            <input required type="text" name="genero" placeholder="Tu genero"/>
+            <button type="submit">Crear cuenta</button>
           </form>
         ) : null }
         {(this.state.success) ? (
-          <form action="/logUser" onSubmit={this.login.bind(this)} method="post">
+          <form className="login-form" action="/logUser" onSubmit={this.login.bind(this)} method="post">
             <p>Ingresa tu correo electrónico para iniciar sesión</p>
             <input ref="mail" type="email" placeholder="mail@example.com" name="correo"/>
             <button type="submit" name="enviar">

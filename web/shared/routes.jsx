@@ -1,11 +1,9 @@
 import React from 'react';
 import App from '../frontend/containers/App';
 import Login from '../frontend/components/Login';
-import SignUp from '../frontend/components/SignUp';
+import Landing from '../frontend/components/Landing';
 import fetch from 'isomorphic-fetch';
 import jwt from 'jsonwebtoken';
-
-let HolaMundo = (props) => <h2>{`Hola, Mundo`}</h2>;
 
 function logout (nextState, replaceState) {
   fetch('/signUserOut', {
@@ -70,7 +68,7 @@ function forceRefresh (Component) {
 export default {
   path: '/',
   component: App,
-  indexRoute: {component: HolaMundo},
+  indexRoute: {component: Landing},
   childRoutes: [
     require('../frontend/routes/Children'),
     { path: '/login', component: Login },

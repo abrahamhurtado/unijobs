@@ -45,20 +45,17 @@ class CrearTrabajo extends React.Component {
   render () {
     const intereses = [];
     return (
-      <div>
-        <p>Ingresa la información del trabajo</p>
+      <div className="login-form">
+        <h2>Ingresa la información del trabajo</h2>
         <form onSubmit={this.onSubmit.bind(this)}>
           <label>Título de la oferta</label>
-          <p></p>
           <input required type="text" name="titulo" placeholder=""/>
           <p></p>
           <label>Descripción de la oferta</label>
-          <p></p>
           <textarea required name="descripcion" placeholder="Descripción de la oferta"/>
-          <p></p>
           <label>¿Qué características buscan en los interesados?</label>
           <Tags ref="tags" intereses={intereses} />
-          <button type="submit">Inicia sesión</button>
+          <button type="submit">Publicar trabajo</button>
         </form>
       </div>
     )
