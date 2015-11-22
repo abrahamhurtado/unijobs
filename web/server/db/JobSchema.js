@@ -14,7 +14,7 @@ let JobSchema = new mongoose.Schema({
   titulo: String,
   intereses: [String],
   descripcion: String,
-  publicacion: Number,
+  publicacion: {type: Number, default: Date.now()},
   interesadosId: [{}],
   empresaId: {}
 }, {strict: false});

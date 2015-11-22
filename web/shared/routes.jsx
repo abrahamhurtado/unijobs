@@ -83,6 +83,7 @@ export default {
     require('../frontend/routes/Perfil'),
     require('../frontend/routes/Editar'),
     require('../frontend/routes/SignUp'),
-    require('../frontend/routes/Dashboard')
+    require('../frontend/routes/Dashboard'),
+    require('../frontend/routes/CrearTrabajo')
   ]
 };

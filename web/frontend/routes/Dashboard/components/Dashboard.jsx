@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch';
 import ProtectedComponent from '../../../containers/Auth';
 import UserDashboard from './UserDashboard';
 import BusinessDashboard from './BusinessDashboard';
+import MissingInformationDashboard from './MissingInformationComponent';
 
 class Dashboard extends React.Component {
   constructor (props, context) {
@@ -12,8 +13,13 @@ class Dashboard extends React.Component {
   }
   render () {
     if (this.props.type === 'usuario') {
-      const {usuario, trabajos} = this.props.payload.data;
-      return <UserDashboard trabajosUsuario={usuario.trabajos} ultimosTrabajos={trabajos} />
+      if (this.props.payload.data.usuario.trabajos.length > 0) {
+        const {usuario, trabajos} = this.props.payload.data;
+        return <UserDashboard trabajosUsuario={usuario.trabajos} ultimosTrabajos={trabajos} />
+      } else {
+        const {trabajos} = this.props.payload.data;
+        return <MissingInformationDashboard ultimosTrabajos={trabajos}/>;
+      }
     } else if (this.props.type === 'empresa') {
       const {empresa, usuarios} = this.props.payload.data;
       return <BusinessDashboard usuariosEmpresa={empresa.usuarios} ultimosUsuarios={usuarios}/>

@@ -20,13 +20,13 @@ class Perfil extends React.Component {
         <ul>
           {usuario.intereses.map((interes, key) => (
             <li key={`${Date.now()}_${key}`}>
-              <Link to={`/trabajos/clave/${interes}`}>
+              <Link to={`/trabajo/clave/${interes}`}>
                 {interes}
               </Link>
             </li>
           ))}
         </ul>
-        <Link to="/perfil/editar">
+        <Link to="/editarperfil">
           Editar perfil
         </Link>
       </article>

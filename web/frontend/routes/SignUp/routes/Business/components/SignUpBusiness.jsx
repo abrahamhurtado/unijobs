@@ -87,9 +87,19 @@ export default class SignUpUsers extends React.Component {
         {(!this.state.error && !this.state.success || !this.state.success) ? (
           <form onSubmit={this.onSubmit.bind(this)}>
             <p>Ingresa tú información</p>
+            <label>Nombre</label>
+            <p></p>
             <input required type="text" name="nombre" placeholder="El nombre de la empresa"/>
+            <p></p>
+            <label>Correo</label>
+            <p></p>
             <input required type="email" name="correo" placeholder="mail@example.com"/>
+            <p></p>
+            <label>Descripción de la empresa</label>
+            <p></p>
             <textarea required name="descripcion" placeholder="Descripción de la empresa"/>
+            <p></p>
+            <label>¿Cuáles son las áreas de interés de tu empresa?</label>
             <Tags ref="tags" intereses={intereses} />
             <button type="submit">Inicia sesión</button>
           </form>

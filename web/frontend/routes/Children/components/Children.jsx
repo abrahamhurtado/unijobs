@@ -36,7 +36,7 @@ class Children extends React.Component {
   }
 }
 
-export default ProtectedComponent(resolve('payload', (props) => {
+export default (resolve('payload', (props) => {
   let query = `
     {
       trabajos {

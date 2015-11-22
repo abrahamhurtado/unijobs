@@ -10,10 +10,10 @@ export default class SignUp extends React.Component {
       <div>
         <ul>
           <li key="link_1">
-            <Link to="/signup/users" state={{ modal: true, returnTo: this.props.location.pathname }}>Usuario</Link>
+            <Link to="/signup/users">Usuario</Link>
           </li>
           <li key="link_2">
-            <Link to="/signup/business" state={{ modal: true, returnTo: this.props.location.pathname }}>Negocios</Link>
+            <Link to="/signup/business">Negocios</Link>
           </li>
         </ul>
         {this.props.children}

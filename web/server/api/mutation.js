@@ -70,7 +70,7 @@ const Mutations = new GraphQLObjectType({
       },
       resolve (parent, {id, titulo, descripcion, intereses}) {
         const interesesBien = intereses.split(',');
-        return Job.create({titulo, descripcion, intereses: interesesBien, empresaId: {_id: id}, publicacion: Date.now(), activo: true});
+        return Job.create({titulo, descripcion, intereses: interesesBien, empresaId: {_id: id}, activo: true});
       }
     },
     actualizarTrabajo: {
