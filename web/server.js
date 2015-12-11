@@ -16,7 +16,7 @@ const env = process.env.NODE_ENV || 'development';
 
 if (env === 'development') {
   const webpack = require('webpack');
-  const config = require('./webpack.config.development.babel');
+  const config = require('./webpack.config.development');
   const compiler = webpack(config);
 
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -44,7 +44,7 @@ app.use(cookieParser());
 app.use(morgan(env === "production" ? "combined" : "dev"));
 
 app.use('/static', express.static('./build'));
-app.use('/styles', express.static('./frontend/styles/'));
+app.use('/styles', express.static('./shared/styles/'));
 
 app.use('/graphql', graphqlHTTP({ schema, pretty: true }));
 

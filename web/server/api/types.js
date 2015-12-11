@@ -165,7 +165,7 @@ const trabajos = new GraphQLObjectType({
   })
 });
 
-export default {
+export {
   usuarios,
   empresas,
   trabajos

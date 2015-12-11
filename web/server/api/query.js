@@ -6,6 +6,10 @@ import {
   GraphQLNonNull
 } from 'graphql';
 
+// import types from './types';
+
+// const {usuarios, empresas, trabajos} = types;
+
 import {usuarios, empresas, trabajos} from './types';
 
 import {User, Business, Job} from '../db/models';

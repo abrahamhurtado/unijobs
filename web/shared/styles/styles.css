@@ -1,0 +1,56 @@
+.oferta-tags {
+  list-style: none;
+  display: inline-block;
+  margin-right: 5px;
+  color: #fff!important;
+}
+
+.oferta-tags-1 {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.oferta-tags a {
+  color: #fff;
+  background: #333;
+  padding: 0 10px;
+}
+
+.oferta-tags a:hover {
+  background: #fff;
+  color: #333;
+}
+
+.link-fix {
+  font-size: 1.6rem;
+  font-family: sans-serif;
+}
+
+span.react-tagsinput-tag {
+  background: #2189f7;
+  border: 0;
+  font-size: 20px;
+  color: #f7f7f7;
+  padding: 5px 10px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: sans-serif;
+  margin: 0 5px 5px 0;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.react-tagsinput-remove {
+  cursor: pointer;
+  color: #fff;
+  margin-left: 5px;
+}
+
+.react-tagsinput {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.react-tagsinput-tag a::before {
+  content: "×";
+}
