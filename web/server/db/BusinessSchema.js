@@ -28,8 +28,8 @@ BusinessSchema.pre('save', function (next) {
       doc.invalidate('correo', 'El correo debe ser único');
       next(new Error('El correo debe ser único'));
     } else {
-      businessCounter.findByIdAndUpdate({_id: 'businessId'}, {$inc: {seq: 1}}, (err, bc) => {
-        if (err) return next(err);
+      businessCounter.findByIdAndUpdate({_id: 'businessId'}, {$inc: {seq: 1}}, (err2, bc) => {
+        if (err) return next(err2);
         doc['_id'] = bc.seq;
         next();
       });

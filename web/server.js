@@ -1,7 +1,5 @@
 import express from 'express';
 
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
 import compression from 'compression';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -44,16 +42,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.text({type: 'application/graphql'}));
 app.use(cookieParser());
 app.use(morgan(env === "production" ? "combined" : "dev"));
-app.use(session({
-  secret: 'unijobs',
-  saveUninitialized: true,
-  resave: true,
-  store: new (MongoStore(session))({
-    mongooseConnection: mongoose.connection
-  })
-}));
 
-app.use('/static', express.static('./frontend/build/'));
+app.use('/static', express.static('./build'));
 app.use('/styles', express.static('./frontend/styles/'));
 
 app.use('/graphql', graphqlHTTP({ schema, pretty: true }));

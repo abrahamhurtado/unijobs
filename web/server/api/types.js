@@ -142,7 +142,7 @@ const trabajos = new GraphQLObjectType({
         Job.find({_id: parent._id}, (err, docs) => {
           const Users = docs[0].interesadosId.map((user) => User.findById(user._id));
           return Users;
-        })
+        });
       }
     },
     empresaId: {

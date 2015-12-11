@@ -15,7 +15,7 @@ module.exports = {
       cb(null, [
         require('./routes/Users'),
         require('./routes/Business')
-      ])
-    })
+      ]);
+    });
   }
 };

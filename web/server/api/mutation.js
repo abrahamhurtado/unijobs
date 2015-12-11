@@ -43,7 +43,7 @@ const Mutations = new GraphQLObjectType({
           } else {
             User.find({correo}, (err2, docs2) => {
               if (err || docs2.length > 0) return new Error('Ya existe un usuario con este correo');
-            })
+            });
           }
         });
         return User.create({nombre, correo, edad, genero});
@@ -103,7 +103,7 @@ const Mutations = new GraphQLObjectType({
           } else {
             Business.find({correo}, (err2, docs2) => {
               if (err || docs2.length > 0) return new Error('Ya existe un usuario con este correo');
-            })
+            });
           }
         });
         const interesesBien = intereses.split(',');

@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { resolve } from 'path';
+import autoprefixer from 'autoprefixer';
 
 export default {
   context: __dirname,
@@ -9,11 +10,16 @@ export default {
     './frontend/main'
   ],
   output: {
-    path: resolve(__dirname, 'frontend/build'),
+    path: resolve(__dirname, 'build'),
     publicPath: '/static/',
     filename: 'bundle.js'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
@@ -21,11 +27,17 @@ export default {
   resolve: {
     extensions: [ '', '.js', '.jsx' ]
   },
+  postcss () {
+    return [autoprefixer];
+  },
   module: {
     loaders: [ {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+    }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loaders: [ 'babel' ],
+      loader: 'babel',
       include: [resolve('./frontend'), resolve('./shared')]
     } ]
   }
