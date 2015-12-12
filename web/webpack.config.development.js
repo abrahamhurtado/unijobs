@@ -1,8 +1,8 @@
-import webpack from 'webpack';
-import { resolve } from 'path';
-import autoprefixer from 'autoprefixer';
+const webpack = require('webpack');
+const resolve = require('path').resolve;
+const autoprefixer = require('autoprefixer');
 
-export default {
+module.exports = {
   context: __dirname,
   devtool: '#source-map',
   entry: [
@@ -28,7 +28,7 @@ export default {
     extensions: [ '', '.js', '.jsx' ]
   },
   postcss () {
-    return [autoprefixer];
+    return [ autoprefixer ];
   },
   module: {
     loaders: [ {
@@ -38,7 +38,22 @@ export default {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
-      include: [resolve('./frontend'), resolve('./shared')]
+      include: [ resolve('./frontend'), resolve('./shared') ],
+      query: {
+        "env": {
+          "development": {
+            "plugins": [
+              ["react-transform", {
+                "transforms": [{
+                  "transform": "react-transform-hmr",
+                  "imports": ["react"],
+                  "locals": ["module"]
+                }]
+              }]
+            ]
+          }
+        }
+      }
     } ]
   }
 };

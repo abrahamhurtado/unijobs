@@ -1,8 +1,8 @@
 node_modules
 frontend/build
 docs
-webpack.config.development.babel.js
-webpack.config.production.babel.js
+web/webpack.config.development.babel.js
+web/webpack.config.production.babel.js
 test
 index.js
 server.js

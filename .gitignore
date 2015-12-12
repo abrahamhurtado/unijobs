@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 web/frontend/build
 web/build
+.DS_Store

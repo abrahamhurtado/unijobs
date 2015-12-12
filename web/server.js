@@ -16,7 +16,7 @@ const env = process.env.NODE_ENV || 'development';
 
 if (env === 'development') {
   const webpack = require('webpack');
-  const config = require('./webpack.config.development.babel');
+  const config = require('./webpack.config.development');
   const compiler = webpack(config);
 
   app.use(require('webpack-dev-middleware')(compiler, {

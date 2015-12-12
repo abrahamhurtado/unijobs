@@ -1,8 +1,8 @@
-import webpack from 'webpack';
-import { resolve } from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const webpack = require('webpack');
+const resolve = require('path').resolve;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-export default {
+module.exports = {
   devtool: '#source-map',
   entry: [
     './frontend/main'
@@ -38,7 +38,7 @@ export default {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
-      include: [resolve('./frontend'), resolve('./shared')]
+      include: [ resolve('./frontend'), resolve('./shared') ]
     } ]
   }
 };
