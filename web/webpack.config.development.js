@@ -7,7 +7,7 @@ module.exports = {
   devtool: '#source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './frontend/main'
+    './client/main'
   ],
   output: {
     path: resolve(__dirname, 'build'),
@@ -38,7 +38,7 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
-      include: [ resolve('./frontend'), resolve('./shared') ],
+      include: [ resolve('./client'), resolve('./shared') ],
       query: {
         "env": {
           "development": {

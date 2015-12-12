@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   devtool: '#source-map',
   entry: [
-    './frontend/main'
+    './client/main'
   ],
   output: {
     path: resolve(__dirname, 'build'),
@@ -33,12 +33,15 @@ module.exports = {
   module: {
     loaders: [ {
       test: /\.css$/,
-      loader: ExtractTextPlugin('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
-      include: [ resolve('./frontend'), resolve('./shared') ]
+      include: [ resolve('./client'), resolve('./shared') ],
+      query: {
+        "plugins": ["react-pure-components"]
+      }
     } ]
   }
 };

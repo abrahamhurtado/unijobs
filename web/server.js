@@ -44,7 +44,7 @@ app.use(cookieParser());
 app.use(morgan(env === "production" ? "combined" : "dev"));
 
 app.use('/static', express.static('./build'));
-app.use('/styles', express.static('./frontend/styles/'));
+app.use('/styles', express.static('./shared/styles/'));
 
 app.use('/graphql', graphqlHTTP({ schema, pretty: true }));
 

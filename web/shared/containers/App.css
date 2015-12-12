@@ -1,0 +1,77 @@
+:global html {
+  font-size: 62.5%;
+  font-size: 10px;
+}
+
+:global * {
+  word-wrap: break-word;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:global body {
+  background: #f7f7f7;
+  color: #333;
+}
+
+:global a {
+  text-decoration: none;
+  color: #2189f7;
+  font-weight: bold;
+}
+
+:global img {
+  max-width: 100%;
+  width: 100%;
+}
+
+:global p, :global li {
+  font-size: 1.6rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  margin: 0 auto;
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+:global h1, :global h2, :global h3, :global h4, :global h5, :global h6 {
+  font-family: 'Open Sans', sans-serif;
+  margin: 10px 0;
+}
+
+:global h1 {
+  font-size: 3.2rem;
+}
+
+:global h2 {
+  font-size: 2.4rem;
+}
+
+:global h3 {
+  font-size: 2rem;
+}
+
+:global h4 {
+  font-size: 1.6rem;
+}
+
+:global nav li {
+  list-style: none;
+  text-align: center;
+  line-height: 45px;
+  width: 33.33%;
+  position: relative;
+  margin: 0;
+}
+
+:global nav li a {
+  color: #fff;
+  display: block;
+}
+
+:global header {
+  background: #333;
+  height: 45px;
+}

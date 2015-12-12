@@ -1,30 +1,10 @@
-html {font-size:62.5%;font-size:10px;}
-* {word-wrap:break-word;margin:0px;padding:0px;box-sizing:border-box;-moz-box-sizing:border-box;}
-body {background: #f7f7f7;color:#000;margin:0;}
-a {text-decoration:none;transition: all .5s;color: #2189f7;font-weight:bold;}
-img {max-width: 100%;width: 100%;transition: all .2s;border: 0;}
-p, li {font-size:1.6rem;font-family:'Roboto', sans-serif;font-weight:300;margin:0 auto 20px;line-height:1.5;max-width:700px;}
-p img {margin-bottom: 0!important;box-shadow: 0 1px 2px rgba(0,0,0,0.7)}
-h1, h2, h3, h4, h5, h5 {font-family:'Open Sans', sans-serif;color: #000;margin: 10px 0;font-weight:bold;letter-spacing:-1px;}
-h1 {font-size:3.2rem;}
-h2 {font-size:2.4rem;}
-h3 {font-size:2rem;}
-h4 {font-size:1.6rem;}
-h5 {font-size:.8rem;}
-h6 {font-size:.4rem;}
-nav li {list-style: none;text-align: center;line-height: 45px;width: 33.33%;position:relative;transition: all .2s;margin: 0;}
 nav li:hover {background:#f7f7f7;box-shadow: 0 0 5px;}
-nav li a {color:#fff;display:block;}
 nav a:hover {color:#000;}
 nav li ul {background: #f7f7f7;margin-top: -1px;max-height:0;transition: all .5s;transition-delay: all .2s;margin:0;padding:0;}
 nav li ul li {display: list-item;text-align: justify;width: 100%;padding-left: 10px;border-bottom: 1px solid #232333;display:none;}
 nav li ul li:hover {background:#5b5b5b;}
 nav li:hover ul {max-height:1000px;}
 nav li:hover ul li {display:list-item;}
-
-header {
-  background: #333;
-}
 
 .container {
   display: flex;
@@ -244,7 +224,7 @@ padding-left: 10px;
     margin-bottom: 10px;
 }
 
-.hero-container {
+/*.hero-container {
   position: relative;
   height: 500px;
   max-height: 500px;
@@ -304,7 +284,7 @@ padding-left: 10px;
     color: #f7f7f7;
     text-shadow: 1px 1px 1px #333;
     margin: 20px auto;
-}
+}*/
 
 .Menu a {
 text-indent: -9999px;

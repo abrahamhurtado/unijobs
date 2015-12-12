@@ -5,7 +5,7 @@ import { createLocation } from 'history';
 import routes from '../shared/routes';
 import html from '../shared/html';
 import jwt from 'jsonwebtoken';
-import Provider from '../frontend/components/Provider';
+import Provider from '../shared/components/Provider';
 
 export default () => (req, res) => {
 

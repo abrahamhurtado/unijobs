@@ -21,6 +21,8 @@
     "autoprefixer": "6.1.2",
     "babel-eslint": "4.1.6",
     "babel-loader": "6.2.0",
+    "babel-plugin-add-module-exports": "0.1.1",
+    "babel-plugin-react-pure-components": "2.0.1",
     "babel-plugin-react-transform": "2.0.0-beta1",
     "babel-preset-es2015": "6.3.13",
     "babel-preset-react": "6.3.13",

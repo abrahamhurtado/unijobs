@@ -1,7 +1,7 @@
 import React from 'react';
-import App from '../frontend/containers/App';
-import Login from '../frontend/components/Login';
-import Landing from '../frontend/components/Landing';
+import App from './containers/App';
+import Login from './components/Login';
+import Landing from './components/Landing';
 import fetch from 'isomorphic-fetch';
 import jwt from 'jsonwebtoken';
 
@@ -60,9 +60,9 @@ function forceRefresh (Component) {
       this.props.history.pushState(null, '/login');
     }
     render () {
-      return <Component {...this.props} />
+      return <Component {...this.props} />;
     }
-  }
+  };
 }
 
 export default {
@@ -70,18 +70,18 @@ export default {
   component: App,
   indexRoute: {component: Landing},
   childRoutes: [
-    require('../frontend/routes/Children'),
+    require('./routes/Children'),
     { path: '/login', component: Login },
     { path: '/signout', onEnter: logout, component: forceRefresh(Login) },
-    require('../frontend/routes/Confirmation'),
-    require('../frontend/routes/Job'),
-    require('../frontend/routes/Empresa'),
-    require('../frontend/routes/Usuario'),
-    require('../frontend/routes/TrabajoKeyword'),
-    require('../frontend/routes/Perfil'),
-    require('../frontend/routes/Editar'),
-    require('../frontend/routes/SignUp'),
-    require('../frontend/routes/Dashboard'),
-    require('../frontend/routes/CrearTrabajo')
+    require('./routes/Confirmation'),
+    require('./routes/Job'),
+    require('./routes/Empresa'),
+    require('./routes/Usuario'),
+    require('./routes/TrabajoKeyword'),
+    require('./routes/Perfil'),
+    require('./routes/Editar'),
+    require('./routes/SignUp'),
+    require('./routes/Dashboard'),
+    require('./routes/CrearTrabajo')
   ]
 };
