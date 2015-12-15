@@ -1,77 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router';
+import Job from '../../../components/Job';
 
 let UserDashboard = (props) => {
-  const {trabajosUsuario, ultimosTrabajos} = props;
-  const trabajosFiltrados1 = trabajosUsuario.filter((x) => x.empresa);
-  const trabajosFiltrados =
-    ultimosTrabajos.filter((x) => x.empresa);
+  let { trabajosUsuario, ultimosTrabajos } = props;
+  trabajosUsuario = trabajosUsuario.filter((x) => x.empresa);
+  ultimosTrabajos = trabajosUsuario.filter((x) => x.empresa);
+
   return (
     <div>
       <h2>Según tus intereses: </h2>
       <ul>
-        {trabajosFiltrados1.map((trabajo, key) => (
-          <li key={ trabajo['_id'] }>
-            <article>
-              <Link
-                to={`/trabajo/${trabajo._id}`}
-              >
-                <h2>{ trabajo.titulo }</h2>
-              </Link>
-              <Link
-                to={`/empresa/${trabajo.empresa._id}`}
-              >
-                <h3>{`por ${trabajo.empresa.nombre}`}</h3>
-              </Link>
-              <p>{trabajo.descripcion}</p>
-              <ul>
-                <li className="oferta-tags-1">Intereses: </li>
-                {trabajo.intereses.map((interes, key) => (
-                  <li
-                  className="oferta-tags" key={`${Date.now()}_interes_${key}`}>
-                    <Link to={`/trabajo/clave/${interes}`}>
-                      {interes}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </li>
-        ))}
+        { trabajosUsuario.map((trabajo, key) => (
+          <Job
+            trabajo={ trabajo }
+            key={ key }
+          />
+        )) }
       </ul>
-      <h2>Los más recientes:</h2>
+      <h2>Los más recientes: </h2>
       <ul>
-        {trabajosFiltrados.map((trabajo, key) => (
-          <li key={ trabajo['_id'] }>
-            <article>
-              <Link
-                to={`/trabajo/${trabajo._id}`}
-              >
-                <h2>{ trabajo.titulo }</h2>
-              </Link>
-              <Link
-                to={`/empresa/${trabajo.empresa._id}`}
-              >
-                <h3>{`por ${trabajo.empresa.nombre}`}</h3>
-              </Link>
-              <p>{trabajo.descripcion}</p>
-              <ul>
-                <li className="oferta-tags-1">Intereses: </li>
-                {trabajo.intereses.map((interes, key) => (
-                  <li
-                  className="oferta-tags" key={`${Date.now()}_interes_${key}`}>
-                    <Link to={`/trabajo/clave/${interes}`}>
-                      {interes}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </li>
-        ))}
+        { ultimosTrabajos.map((trabajo, key) => (
+          <Job
+            trabajo={ trabajo }
+            key={ key }
+          />
+        )) }
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default UserDashboard;

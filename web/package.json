@@ -43,7 +43,9 @@
     "postcss-modules-scope": "1.0.0",
     "postcss-modules-values": "1.1.1",
     "precommit-hook-eslint": "3.0.0",
+    "react-transform-catch-errors": "1.0.0",
     "react-transform-hmr": "1.0.1",
+    "redbox-react": "1.2.0",
     "skin-deep": "0.11.0",
     "style-loader": "0.13.0",
     "webpack": "1.12.9",
@@ -52,6 +54,7 @@
   },
   "dependencies": {
     "babel-core": "6.3.17",
+    "babel-polyfill": "6.3.14",
     "babel-register": "6.3.13",
     "body-parser": "1.14.1",
     "compression": "1.6.0",

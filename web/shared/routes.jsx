@@ -82,6 +82,7 @@ export default {
     require('./routes/Editar'),
     require('./routes/SignUp'),
     require('./routes/Dashboard'),
-    require('./routes/CrearTrabajo')
+    require('./routes/CrearTrabajo'),
+    require('./routes/EditarTrabajo')
   ]
 };

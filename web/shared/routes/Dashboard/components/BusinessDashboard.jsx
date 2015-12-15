@@ -1,62 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router';
+import User from '../../../components/User';
 
 let BusinessDashboard = (props) => {
-  const {usuariosEmpresa, ultimosUsuarios} = props;
+  const { usuariosEmpresa, ultimosUsuarios } = props;
+
   return (
     <div>
       <h2>Según tus intereses: </h2>
       <ul>
-        {usuariosEmpresa.map((usuario, key) => (
-          <li key={ usuario['_id'] }>
-            <article>
-              <Link
-                to={`/usuario/${usuario._id}`}
-              >
-                <h2>{ usuario.nombre }</h2>
-              </Link>
-              <p>{usuario.descripcion}</p>
-              <ul>
-                <li>Intereses: </li>
-                {usuario.intereses.map((interes, key) => (
-                  <li key={`${Date.now()}_interes_${key}`}>
-                    <Link to={`/trabajo/clave/${interes}`}>
-                      {interes}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </li>
-        ))}
+        { usuariosEmpresa.map((usuario, key) => (
+          <User
+            usuario={ usuario }
+            key={ key }
+          />
+        )) }
       </ul>
-      <h2>Los más recientes:</h2>
+      <h2>Los más recientes</h2>
       <ul>
-        {ultimosUsuarios.map((usuario, key) => (
-          <li key={ usuario['_id'] }>
-            <article>
-              <Link
-                to={`/usuario/${usuario._id}`}
-              >
-                <h2>{ usuario.nombre }</h2>
-              </Link>
-              <p>{usuario.descripcion}</p>
-              <ul>
-                <li>Intereses: </li>
-                {usuario.intereses.map((interes, key) => (
-                  <li key={`${Date.now()}_interes_${key}`}>
-                    <Link to={`/trabajo/clave/${interes}`}>
-                      {interes}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </li>
-        ))}
+        { ultimosUsuarios.map((usuario, key) => (
+          <User
+            usuario={ usuario }
+            key={ key }
+          />
+        )) }
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default BusinessDashboard;

@@ -6,16 +6,16 @@ export default class Tags extends React.Component {
     super(props);
     this.state = {
       tags: this.props.intereses || []
-    }
+    };
   }
   handleChange (tags) {
-    this.setState({tags})
+    this.setState({tags});
   }
   render () {
     return (
       <TagsInput
-        value={this.state.tags}
-        onChange={this.handleChange.bind(this)}
+        value={ this.state.tags }
+        onChange={ this.handleChange.bind(this) }
       />
     );
   }

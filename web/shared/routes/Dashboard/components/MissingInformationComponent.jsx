@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Job from '../../../components/Job';
 
 let MissingInformationDashboard = (props) => {
   const {ultimosTrabajos} = props;
@@ -13,36 +14,15 @@ let MissingInformationDashboard = (props) => {
       </Link>
       <h2>Los más recientes:</h2>
       <ul>
-        {trabajosFiltrados.map((trabajo, key) => (
-          <li key={ trabajo['_id'] }>
-            <article>
-              <Link
-                to={`/trabajo/${trabajo._id}`}
-              >
-                <h2>{ trabajo.titulo }</h2>
-              </Link>
-              <Link
-                to={`/empresa/${trabajo.empresa._id}`}
-              >
-                <h3>{`por ${trabajo.empresa.nombre}`}</h3>
-              </Link>
-              <p>{trabajo.descripcion}</p>
-              <ul>
-                <li>Intereses: </li>
-                {trabajo.intereses.map((interes, key) => (
-                  <li key={`${Date.now()}_interes_${key}`}>
-                    <Link to={`/trabajo/clave/${interes}`}>
-                      {interes}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </li>
-        ))}
+        { trabajosFiltrados.map((trabajo, key) => (
+          <Job
+            trabajo={ trabajo }
+            key={ key }
+          />
+        )) }
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default MissingInformationDashboard;

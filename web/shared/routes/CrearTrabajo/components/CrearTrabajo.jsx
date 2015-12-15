@@ -39,7 +39,7 @@ class CrearTrabajo extends React.Component {
       console.log('Todo salió purrfect');
     })
     .catch((r) => {
-      console.log('Ocurrió un error');
+      console.error(r);
     });
   }
   render () {

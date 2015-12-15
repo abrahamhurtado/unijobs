@@ -14,26 +14,26 @@ class Empresa extends React.Component {
     }
   }
   render () {
-    const {empresa} = this.props.payload.data;
-    const {trabajos} = empresa;
+    const { empresa } = this.props.payload.data;
+    const { trabajos } = empresa;
     return (
       <article>
         <image src="https://pbs.twimg.com/profile_images/661230840014245889/9tF0hL1Z.png" />
-        <h2>{empresa.nombre}</h2>
+        <h2>{ empresa.nombre }</h2>
         <h3>Acerca de la empresa</h3>
-        <p>{empresa.descripcion}</p>
-        <h3>{`Ofertas de trabajo por ${empresa.nombre}`}</h3>
+        <p>{ empresa.descripcion }</p>
+        <h3>{ `Ofertas de trabajo por ${empresa.nombre}` }</h3>
         <ul>
-          {trabajos.map((trabajo, key) => (
-            <li key={`${Date.now()}_${key}_${trabajo._id}`}>
-              <Link to={`/trabajo/${trabajo._id}`}>
-                {trabajo.titulo}
+          { trabajos.map((trabajo, key) => (
+            <li key={ `${Date.now()}_${key}_${trabajo._id}` }>
+              <Link to={ `/trabajo/${trabajo._id}` }>
+                { trabajo.titulo }
               </Link>
             </li>
-          ))}
+          )) }
         </ul>
       </article>
-    )
+    );
   }
 }
 

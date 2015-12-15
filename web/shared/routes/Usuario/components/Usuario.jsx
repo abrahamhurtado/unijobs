@@ -18,21 +18,21 @@ class Usuario extends React.Component {
     return (
       <article>
         <image src="https://pbs.twimg.com/profile_images/661230840014245889/9tF0hL1Z.png" />
-        <h2>{usuario.nombre}</h2>
-        <h3>{`Acerca de ${usuario.nombre}`}</h3>
-        <p>{usuario.descripcion}</p>
-        <h3>{`A ${usuario.nombre} le interesan los siguientes tópicos:`}</h3>
+        <h2>{ usuario.nombre }</h2>
+        <h3>{ `Acerca de ${usuario.nombre}` }</h3>
+        <p>{ usuario.descripcion }</p>
+        <h3>{ `A ${usuario.nombre} le interesan los siguientes tópicos:` }</h3>
         <ul>
-          {usuario.intereses.map((interes, key) => (
-            <li key={`${Date.now()}_${key}`}>
-              <Link to={`/trabajos/clave/${interes}`}>
-                {interes}
+          { usuario.intereses.map((interes, key) => (
+            <li key={ `${Date.now()}_${key}` }>
+              <Link to={ `/trabajos/clave/${interes}` }>
+                { interes }
               </Link>
             </li>
-          ))}
+          )) }
         </ul>
       </article>
-    )
+    );
   }
 }
 
