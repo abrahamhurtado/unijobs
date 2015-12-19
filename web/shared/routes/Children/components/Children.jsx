@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import ProtectedComponent from '../../../containers/Auth';
 import JobsList from './JobsList';
+import styles from './Children.css';
 
 class Children extends React.Component {
   constructor (props) {
@@ -22,13 +23,13 @@ class Children extends React.Component {
     const {trabajos} = this.props.payload.data;
     return (
       <div>
-        <div className="filterSearchTextContainer">
+        <div className={ styles.filterSearchTextContainer }>
           <h3>Busca trabajos mediante alguna palabra clave: </h3>
           <input
-          type="text"
-          placeholder=""
-          onChange={ this.onChange.bind(this) }
-        />
+            type="text"
+            placeholder=""
+            onChange={ this.onChange.bind(this) }
+          />
         </div>
         <JobsList
           trabajos={ trabajos }

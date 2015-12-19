@@ -1,13 +1,14 @@
 import React from 'react';
 import serializeForm from 'form-serialize';
 import fetch from 'isomorphic-fetch';
+import styles from '../../../components/SignUp.css';
 
 export default class SignUpUsers extends React.Component {
   constructor (props, context) {
     super(props, context);
     this.state = {
       success: false,
-      error: false,
+      error: false
     };
   }
   onSubmit (e) {
@@ -39,7 +40,8 @@ export default class SignUpUsers extends React.Component {
       if (r.errors) throw new Error(r.errors[0].message);
       this.setState({
         success: true,
-        error: false
+        error: false,
+        message: 'Se creó el usuario'
       });
     })
     .catch((r) => {
@@ -50,60 +52,45 @@ export default class SignUpUsers extends React.Component {
       });
     });
   }
-  login (e) {
-    e.preventDefault();
-    const {correo} = serializeForm(e.target, {hash: true});
-
-    fetch('/logUser', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        correo
-      })
-    })
-    .then((r) => r.json())
-    .then(({mensaje}) => {
-      this.setState({
-        mensaje
-      });
-    })
-    .catch(({mensaje}) => {
-      this.setState({
-        mensaje
-      });
-    });
-  }
   render () {
+    const style = (this.state.success) ? styles.successMessage : styles.errorMessage;
     return (
       <div>
-        {(this.state.error && this.state.message) ? (<p className="errorMessage">{this.state.message}</p>) : null }
-        {(this.state.success) ? (<p className="successMessage">¡Se creó el usuario!</p>) : null }
-        {(!this.state.error && !this.state.success || !this.state.success) ? (
-          <form onSubmit={this.onSubmit.bind(this)}>
-            <p>Ingresa tú información</p>
-            <label>Nombre</label>
-            <input required type="text" name="nombre" placeholder="Tu nombre"/>
-            <label>Correo</label>
-            <input required type="email" name="correo" placeholder="mail@example.com"/>
-            <label>Edad</label>
-            <input required type="number" name="edad" placeholder="Tu edad"/>
-            <label>Edad</label>
-            <input required type="text" name="genero" placeholder="Tu genero"/>
-            <button type="submit">Crear cuenta</button>
-          </form>
+        { (this.state.error || this.state.success) ? (
+          <p className={ style }>{ this.state.message }</p>
         ) : null }
-        {(this.state.success) ? (
-          <form className="login-form" action="/logUser" onSubmit={this.login.bind(this)} method="post">
-            <p>Ingresa tu correo electrónico para iniciar sesión</p>
-            <input ref="mail" type="email" placeholder="mail@example.com" name="correo"/>
-            <button type="submit" name="enviar">
-              Inicia sesión
-            </button>
-          </form>
-        ) : null}
+        <form onSubmit={ this.onSubmit.bind(this) }>
+          <p>Ingresa tú información</p>
+          <label>Nombre</label>
+          <input
+            required
+            type="text"
+            name="nombre"
+            placeholder="Tu nombre"
+          />
+          <label>Correo</label>
+          <input
+            required
+            type="email"
+            name="correo"
+            placeholder="mail@example.com"
+          />
+          <label>Edad</label>
+          <input
+            required
+            type="number"
+            name="edad"
+            placeholder="Tu edad"
+          />
+          <label>Edad</label>
+          <input
+            required
+            type="text"
+            name="genero"
+            placeholder="Tu genero"
+          />
+          <button type="submit">Crear cuenta</button>
+        </form>
       </div>
     );
   }

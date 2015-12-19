@@ -5,7 +5,7 @@ export default class Tags extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      tags: this.props.intereses || []
+      tags: this.props.intereses.map((x) => x.toLowerCase()) || []
     };
   }
   handleChange (tags) {

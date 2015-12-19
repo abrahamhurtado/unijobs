@@ -62,7 +62,7 @@ class EditarTrabajo extends React.Component {
           <label>¿Qué características se buscan en los interesados?</label>
           <Tags
             ref="tags"
-            intereses={ intereses }
+            intereses={ intereses.map((x) => x.toLowerCase()) }
           />
           <button type="submit">
             Actualizar oferta

@@ -75,3 +75,31 @@
   background: #333;
   height: 45px;
 }
+
+:global nav li:hover {background:#f7f7f7;box-shadow: 0 0 5px;}
+:global nav a:hover {color:#000;}
+:global nav li ul {background: #f7f7f7;margin-top: -1px;max-height:0;transition: all .5s;transition-delay: all .2s;margin:0;padding:0;}
+:global nav li ul li {display: list-item;text-align: justify;width: 100%;padding-left: 10px;border-bottom: 1px solid #232333;display:none;}
+:global nav li ul li:hover {background:#5b5b5b;}
+:global nav li:hover ul {max-height:1000px;}
+:global nav li:hover ul li {display:list-item;}
+
+:global article a h3, :global article a h2 {
+    font-style: italic;
+    border-bottom: 3px solid #2189f7;
+    transition: .5s;
+    display: table;
+}
+
+:global article a:hover h3, :global article a:hover h2 {
+  box-shadow: inset 0 -5px 0 #2189f7;
+}
+
+:global article {
+  background: #fff;
+  padding: 20px 30px;
+}
+
+:global article a h2 {
+  font-style: normal!important;
+}

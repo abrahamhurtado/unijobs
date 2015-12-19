@@ -1,87 +1,3 @@
-nav li:hover {background:#f7f7f7;box-shadow: 0 0 5px;}
-nav a:hover {color:#000;}
-nav li ul {background: #f7f7f7;margin-top: -1px;max-height:0;transition: all .5s;transition-delay: all .2s;margin:0;padding:0;}
-nav li ul li {display: list-item;text-align: justify;width: 100%;padding-left: 10px;border-bottom: 1px solid #232333;display:none;}
-nav li ul li:hover {background:#5b5b5b;}
-nav li:hover ul {max-height:1000px;}
-nav li:hover ul li {display:list-item;}
-
-.container {
-  display: flex;
-}
-
-.container h1, .container nav {
-  width: 50%;
-  flex: 1 1 auto;
-}
-
-.container h1 {
-  font-size: 2.2rem;
-  text-align: center;
-  color: white;
-}
-
-.container h1 a {
-  color: white;
-}
-
-.container nav ul {
-  list-style: none;
-}
-
-.container nav ul li {
-  width: 25%;
-  display: inline-block;
-}
-
-article a h3, article a h2 {
-    font-style: italic;
-    border-bottom: 3px solid #2189f7;
-    transition: .5s;
-    display: table;
-}
-
-article a:hover h3, article a:hover h2 {
-  box-shadow: inset 0 -5px 0 #2189f7;
-}
-
-article {
-  background: #fff;
-  padding: 20px 30px;
-}
-
-article a h2 {
-  font-style: normal!important;
-}
-
-.filterSearchTextContainer {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.filterSearchTextContainer h3 {
-  display: inline-block;
-  margin: 15px 10px 15px 0;
-}
-
-.filterSearchTextContainer input {
-  background: none;
-  border: 0;
-  font-size: 2rem;
-  line-height: 23px;
-  font-weight: bold;
-  text-decoration: underline;
-  color: #2189f7;
-  border-bottom: 1px solid #2189f7;
-  transition: all 1s;
-}
-
-.filterSearchTextContainer input:focus {
-  outline-offset: 0;
-  outline: 0;
-  border-bottom: 0;
-}
-
 .oferta-tags {
   list-style: none;
   display: inline-block;
@@ -110,113 +26,24 @@ article a h2 {
   font-family: sans-serif;
 }
 
-.login-form {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid rgba(51, 51, 51, 0.15);
-  background: #fff;
-  border-radius: 5px;
-}
-
-.login-form button {
-  background: #333;
-  border: 0;
-  line-height: 30px;
-  font-size: 20px;
-  color: #f7f7f7;
-  padding: 0 10px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.login-form input {
-  background: none;
-  border: 0;
-  border-bottom: 1px solid blue;
-  line-height: 30px;
-  font-size: 20px;
-  margin-right: 5px;
-}
-
-.login-form input:focus {
-  outline: 0;
-  outline-offset: 0;
-}
-
-.link-options-1 {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: #333;
-  padding: 5px;
-  border-radius: 5px 0px 0px 5px;
-  border: 1px solid #333;
-  color: #f7f7f7;
-}
-
-.link-options-1 a {
-  color: #f7f7f7;
-}
-
-.link-options li {
-  list-style: none;
-  display: inline-block;
-  width: 50%;
-}
-
-.link-options-2 {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: #333;
-  padding: 5px;
-  border-radius: 0px 5px 5px 0px;
-  border: 1px solid #333;
-  color: #f7f7f7;
-}
-
-.login-form textarea {
-  width: 100%;
-  font-size: 1.4rem;
-}
-
-label {
-  font-size: 1.6rem;
-  font-family: sans-serif;
-  display: block;
-  margin: 15px 0;
-}
-
 span.react-tagsinput-tag {
   background: #2189f7;
   border: 0;
-  line-height: 30px;
   font-size: 20px;
   color: #f7f7f7;
-  padding: 0 10px;
+  padding: 5px 10px;
   font-weight: 500;
   cursor: pointer;
   font-family: sans-serif;
-  margin-right: 5px;
-}
-
-.successMessage {
-  color: #3c763d;
-  background-color: #dff0d8;
-  border-color: 1px solid #d6e9c6;
+  margin: 0 5px 5px 0;
   border-radius: 5px;
-  font-weight: bold;
-  padding-left: 10px;
+  display: inline-block;
 }
 
-.errorMessage {
-  color: #a94442;
-background-color: #f2dede;
-border-color: 1px solid #ebccd1;
-border-radius: 5px;
-font-weight: bold;
-padding-left: 10px;
+.react-tagsinput-remove {
+  cursor: pointer;
+  color: #fff;
+  margin-left: 5px;
 }
 
 .react-tagsinput {
@@ -224,105 +51,6 @@ padding-left: 10px;
     margin-bottom: 10px;
 }
 
-/*.hero-container {
-  position: relative;
-  height: 500px;
-  max-height: 500px;
-  overflow: hidden;
-}
-
-.hero-image {
-  background: url('/styles/HNCK8997.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 500px;
-  background-position: 0px 59%;
-}
-
-.hero-text {
-  position: absolute;
-  padding: 55px 55px;
-  width: 100%;
-  line-height: 1.5;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  text-align: center;
-  display: table;
-}
-
-.hero-text-h2 {
-  font-size: 5rem;
-  color: #f7f7f7;
-  text-shadow: 1px 1px 1px #333;
-  line-height: 1.25;
-}
-
-.hero-text-h3 {
-  font-size: 2rem;
-      font-weight: 500;
-      color: #f7f7f7;
-      letter-spacing: 0;
-      line-height: 1.5;
-      text-shadow: 1px 1px 1px #333;
-}
-
-.button {
-  font-size: 2.5rem;
-    font-family: sans-serif;
-    font-weight: lighter;
-    max-width: 200px;
-    text-align: center;
-    border-radius: 5px;
-    background: #03A9F4;
-    padding: 10px;
-    color: #f7f7f7;
-    text-shadow: 1px 1px 1px #333;
-    margin: 20px auto;
-}*/
-
-.Menu a {
-text-indent: -9999px;
-}
-
-.Menu-home a {
-  background: url('./home.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.Menu-new a, .Menu-crear a {
-  background: url('./plus.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.Menu-perfil a {
-  background: url('./user.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.Menu-logout a {
-  background: url('./signout.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.Menu-login a {
-  background: url('./signin.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.Menu-signup a {
-  background: url('./creatuser.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+.react-tagsinput-tag a::before {
+  content: "×";
 }

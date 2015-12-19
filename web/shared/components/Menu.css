@@ -1,0 +1,73 @@
+:local(.container) {
+  display: flex;
+}
+
+:local(.container) h1, :local(.container) nav {
+  width: 50%;
+  flex: 1 1 auto;
+}
+
+:local(.container) h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: white;
+}
+
+:local(.container) h1 a {
+  color: white;
+}
+
+:local(.container) nav ul {
+  list-style: none;
+}
+
+:local(.container) nav ul li {
+  width: 25%;
+  display: inline-block;
+}
+
+:local(.Menu) a {
+  text-indent: -9999px;
+}
+
+:local(.MenuHome) a {
+  /*background: url('./home.svg');*/
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+:local(.MenuNew) a, :local(.Menu-crear) a {
+  /*background: url('./plus.svg');*/
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+:local(.MenuPerfil) a {
+  /*background: url('./user.svg');*/
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+:local(.MenuLogout) a {
+  /*background: url('./signout.svg');*/
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+:local(.MenuLogin) a {
+  /*background: url('./signin.svg');*/
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+:local(.MenuSignup) a {
+  /*background: url('./creatuser.svg');*/
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

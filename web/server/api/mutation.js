@@ -37,7 +37,7 @@ const Mutations = new GraphQLObjectType({
       },
       resolve (parent, {nombre, correo, edad, genero}) {
         Business.find({correo}, (err, docs) => {
-          if (err || docs.length > 0) {
+          if (err || docs === null || docs.length > 0) {
             return new Error('Ya existe un usuario con este correo');
           } else {
             User.find({correo}, (err2, docs2) => {
@@ -97,7 +97,7 @@ const Mutations = new GraphQLObjectType({
       },
       resolve (parent, {nombre, descripcion, intereses, correo}) {
         User.find({correo}, (err, docs) => {
-          if (err || docs.length > 0) {
+          if (err || docs === null | docs.length > 0) {
             return new Error('Ya existe un usuario con este correo');
           } else {
             Business.find({correo}, (err2, docs2) => {

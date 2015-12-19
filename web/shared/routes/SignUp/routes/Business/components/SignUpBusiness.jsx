@@ -2,6 +2,7 @@ import React from 'react';
 import serializeForm from 'form-serialize';
 import fetch from 'isomorphic-fetch';
 import Tags from '../../../../Editar/components/Tags';
+import styles from '../../../components/SignUp.css';
 
 export default class SignUpUsers extends React.Component {
   constructor (props, context) {
@@ -41,7 +42,8 @@ export default class SignUpUsers extends React.Component {
       if (r.errors) throw new Error(r.errors[0].message);
       this.setState({
         success: true,
-        error: false
+        error: false,
+        message: "Se creó el usuario"
       });
     })
     .catch((r) => {
@@ -52,61 +54,43 @@ export default class SignUpUsers extends React.Component {
       });
     });
   }
-  login (e) {
-    e.preventDefault();
-    const {correo} = serializeForm(e.target, {hash: true});
-
-    fetch('/logUser', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        correo
-      })
-    })
-    .then((r) => r.json())
-    .then(({mensaje}) => {
-      this.setState({
-        mensaje
-      });
-    })
-    .catch(({mensaje}) => {
-      this.setState({
-        mensaje
-      });
-    });
-  }
   render () {
     const intereses = [];
+    const style = (this.state.success) ? styles.successMessage : styles.errorMessage;
     return (
       <div>
-        {(this.state.error && this.state.message) ? (<p className="errorMessage">{this.state.message}</p>) : null }
-        {(this.state.success) ? (<p className="successMessage">Se creó el usuario</p>) : null }
-        {(!this.state.error && !this.state.success || !this.state.success) ? (
-          <form onSubmit={this.onSubmit.bind(this)}>
-            <p>Ingresa tú información</p>
-            <label>Nombre</label>
-            <input required type="text" name="nombre" placeholder="El nombre de la empresa"/>
-            <label>Correo</label>
-            <input required type="email" name="correo" placeholder="mail@example.com"/>
-            <label>Descripción de la empresa</label>
-            <textarea required name="descripcion" placeholder="Descripción de la empresa"/>
-            <label>¿Cuáles son las áreas de interés de tu empresa?</label>
-            <Tags ref="tags" intereses={intereses} />
-            <button type="submit">Crear cuenta</button>
-          </form>
-        ) : null }
-        {(this.state.success) ? (
-          <form action="/logUser" onSubmit={this.login.bind(this)} method="post">
-            <p>Ingresa tu correo electrónico para iniciar sesión</p>
-            <input required ref="mail" type="email" placeholder="mail@example.com" name="correo"/>
-            <button type="submit" name="enviar">
-              Inicia sesión
-            </button>
-          </form>
-        ) : null}
+        <form onSubmit={ this.onSubmit.bind(this) }>
+          <p>Ingresa tú información</p>
+          <label>Nombre</label>
+          <input
+            required
+            type="text"
+            name="nombre"
+            placeholder="El nombre de la empresa"
+          />
+          <label>Correo</label>
+          <input
+            required
+            type="email"
+            name="correo"
+            placeholder="mail@example.com"
+          />
+          <label>Descripción de la empresa</label>
+          <textarea
+            required
+            name="descripcion"
+            placeholder="Descripción de la empresa"
+          />
+          <label>¿Cuáles son las áreas de interés de tu empresa?</label>
+          <Tags
+            ref="tags"
+            intereses={ intereses.map((x) => x.toLowerCase()) }
+          />
+          <button type="submit">Crear cuenta</button>
+          { (this.state.error || this.state.success) ? (
+            <p className={ style }>{ this.state.message }</p>
+          ) : null }
+        </form>
       </div>
     );
   }

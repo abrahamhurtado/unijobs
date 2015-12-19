@@ -1,12 +1,15 @@
 import React from 'react';
 import serializeForm from 'form-serialize';
 import fetch from 'isomorphic-fetch';
+import styles from './Form.css';
 
 export default class Login extends React.Component {
   constructor (props, context) {
     super(props, context);
     this.state = {
-      mensaje: ''
+      message: '',
+      success: false,
+      error: false
     };
   }
   onSubmit (e) {
@@ -24,31 +27,31 @@ export default class Login extends React.Component {
       })
     })
     .then((r) => r.json())
-    .then(({mensaje}) => {
+    .then((r) => {
+      if (r.errors) throw new Error(r.errors[0].message);
       this.setState({
-        mensaje
+        message: r.mensaje,
+        success: true,
+        error: false
       });
     })
-    .catch(({mensaje}) => {
+    .catch(({mensaje: message}) => {
       this.setState({
-        mensaje
+        message,
+        success: false,
+        error: true
       });
     });
   }
   render () {
+    const style = (this.state.success) ? styles.successMessage : styles.errorMessage;
     return (
-      <div>
-        <form
-          className="login-form"
-          action="/logUser"
-          method="post"
-          onSubmit={this.onSubmit.bind(this)}
-        >
-          {(!this.state.mensaje) ? (
-            <p>Ingresa tu correo electrónico para iniciar sesión</p>
-          ) : (
-            <p className="successMessage">{`${this.state.mensaje}`}</p>
-          )}
+      <div className={ styles.loginForm }>
+        <form onSubmit={ this.onSubmit.bind(this) }>
+          <h3>Introduce tu correo para iniciar sesión</h3>
+          { (this.state.error || this.state.success) ? (
+            <p className={ style }>{ this.state.message }</p>
+          ) : null }
           <input
             ref="mail"
             type="email"

@@ -3,8 +3,16 @@ import fetch from 'isomorphic-fetch';
 import serializeForm from 'form-serialize';
 import { Link } from 'react-router';
 import Tags from './Tags';
+import styles from '../../../components/Form.css';
 
 export default class EditarNegocio extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      success: false,
+      error: false
+    };
+  }
   actualizarNegocio (e) {
     e.preventDefault();
     const { nombre, descripcion } = serializeForm(e.target, { hash: true });
@@ -40,10 +48,13 @@ export default class EditarNegocio extends React.Component {
   }
   render () {
     const { nombre, descripcion, intereses, trabajos } = this.props.payload.data.empresa;
-
+    const style = (this.state.success) ? styles.successMessage : styles.errorMessage;
     return (
-      <div className="login-form">
+      <div className={ styles.loginForm }>
         <h2>Edita tu perfil, { nombre }</h2>
+        { (this.state.error || this.state.success) ? (
+          <p className={ style }>{ this.state.message }</p>
+        ) : null }
         <form onSubmit={ this.actualizarNegocio.bind(this) }>
           <label>Nombre</label>
           <input
@@ -61,7 +72,7 @@ export default class EditarNegocio extends React.Component {
           <label>Cualidades e intereses buscados en los aspirantes</label>
           <Tags
             ref="tags"
-            intereses={ intereses }
+            intereses={ intereses.map((x) => x.toLowerCase()) }
           />
           <ul>
             { trabajos.map((trabajo, key) => (
