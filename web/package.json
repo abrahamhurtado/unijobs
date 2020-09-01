@@ -52,7 +52,7 @@
     "isomorphic-fetch": "2.2.0",
     "jsonwebtoken": "5.4.1",
     "lodash.isequal": "3.0.4",
-    "mongoose": "4.2.3",
+    "mongoose": "5.10.2",
     "morgan": "1.6.1",
     "nodemailer": "1.8.0",
     "object-assign": "4.0.1",
